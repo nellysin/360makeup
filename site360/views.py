@@ -7,3 +7,6 @@ def home(request):
 def product_detail(request, productname):
     product = get_object_or_404(Product, name=productname)
     return render(request, 'site360/post_detail.html', {'product_name': productname})
+
+def about_us(request):
+    return render(request, 'site360/about_us.html', {})

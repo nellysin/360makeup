@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.home, name='home'),
+    url(r'^about-us$', views.about_us, name='about_us'),
 
     #Category search page regex explanation:
     #First character must be a letter
