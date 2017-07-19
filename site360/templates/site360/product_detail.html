@@ -1,1 +1,142 @@
 {% extends 'site360/base.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+header {
+    background-color: #FFC2E0;
+}
+
+header h1 {
+    margin: 0;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+p{
+font-family: "century gothic"
+}
+
+h1{
+font-family: "century gothic"
+}
+h2{
+font-family: "century gothic" 
+}
+h3{
+font-family: "century gothic" 
+
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #FFC2E0;
+}
+
+li {
+    float: left;
+    font-family: "century gothic"
+}
+
+li a, .dropbtn {
+    display: inline-block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+    background-color: #FF47A3;
+}
+
+li.dropdown {
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #FFC2E0;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {background-color: #FF47A3 }
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+</style>
+</head>
+<body>
+
+<ul>
+  <li><a href="#home">Home</a></li>
+  <li><a href="#login">Log In</a></li>
+   <li><a href="#signup">Sign Up</a></li>
+    <li><a href="#login">About Us</a></li>
+    <li class="dropdown">
+    <a href="javascript:void(0)" class="dropbtn">View</a>
+    <div class="dropdown-content">
+      <a href="#">Foundation</a>
+      <a href="#">Eyeshadow</a>
+      <a href="#">Lipstick</a>
+    </div>
+  </li>
+</ul>
+<br>
+<header>
+    <h1>Product category, ex: "Eyeshadows"</h1>
+</header>
+<h2>Product name, ex: "Naked 2 Palette"</h2>
+    <p style="float: left; padding: 0px 5px"><img src = http://brtstructures.com/get/files/image/galleries/placeholder-rectangle.jpg?500x240 width = 200px height = 200px border="1px"></p>
+
+<br>
+
+<p> Price: $x </p>
+<p> Avg. # of Stars: </p>
+<p> Description: </p>
+<p> Where to buy online (links!): </p>
+
+<br>
+<br>
+
+</div>
+<br>
+
+<div style = "background-color: #FFC2E0;
+    width: 664px;
+    border:1px ;
+    padding: 0px;
+    margin: 0px;">
+<h2> Reviews </h2> </div>
+<div style = "background-color: white;
+    width: 664px;
+    border:1px solid pink;
+    padding: 10px;
+    margin: 5px;">
+<p> this is where a review goes (username, # of stars, user input) </p>
+</div>
+<div style = "background-color: white;
+    width: 664px;
+    border:1px solid pink;
+    padding: 10px;
+    margin: 5px;">
+<p> this is where a review goes (username, # of stars, user input) </p>
+</div>
