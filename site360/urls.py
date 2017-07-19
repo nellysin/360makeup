@@ -8,5 +8,6 @@ urlpatterns = [
     #Category search page regex explanation:
     #First character must be a letter
     #After that it can have lowercase letters, -s, and numbers
-    url(r'^product/(?P<productname>[a-z]([a-z]|-|\d)*)/$', views.product_detail, name='product_detail'),
+    url(r'^product/(?P<productname>[A-Z][a-z]([a-z]|-|\d)*)/$', views.product_detail, name='product_detail'),
+    url(r'^signuplogin$', views.signup_login, name='signup_login'),
 ]
