@@ -1,4 +1,4 @@
-from django.contrib import Product
-from .models import Category
+from django.contrib import admin
+from .models import Product
 
 admin.site.register(Product)
