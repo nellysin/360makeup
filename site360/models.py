@@ -9,7 +9,6 @@ class User(models.Model):
             default=timezone.now)
     published_date = models.DateTimeField(
             blank=True, null=True)
-    test = ""
 
     def publish(self):
         self.published_date = timezone.now()
@@ -22,6 +21,7 @@ class Product(models.Model):
     name = models.CharField(max_length=100)
     company = models.CharField(max_length=100)
     description = models.TextField()
+    category = models.CharField(max_length=20, default="Miscellaneous")
     created_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
