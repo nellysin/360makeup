@@ -8,11 +8,11 @@
 {% block content %}
 
 {% for product in products %}
-    <a href="/product/{{ product.name_to_url }}"><h2>{{ product.name }}</h2></a>
+    <a href="/product/{{ product.name_to_url }}/"><h2>{{ product.name }}</h2></a>
     <img src="{{ product.image_url }}" alt="A picture of {{ product.name }}"/>
     <p>{{ product.company }}</p>
     <p>Average stars: {{ product.average_rating }}</p>
-    <p>{{ product.description }} </p>
+    <p>{{ product.description }}</p>
 {% endfor %}
 
 {% endblock %}

@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 
 
+
 class User(models.Model):
     #IN PROGRESS
     username = models.CharField(max_length=20)
@@ -34,3 +35,10 @@ class Product(models.Model):
 
     def name_to_url(self):
         return self.name.replace(" ", "-")
+
+
+class Review(models.Model):
+    date_posted = models.DateTimeField(
+            default=timezone.now)
+    body = models.CharField(max_length=1000)
+    product = models.ForeignKey(Product)

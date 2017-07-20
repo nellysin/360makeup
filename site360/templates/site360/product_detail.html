@@ -25,10 +25,10 @@ h1{
 font-family: "century gothic"
 }
 h2{
-font-family: "century gothic" 
+font-family: "century gothic"
 }
 h3{
-font-family: "century gothic" 
+font-family: "century gothic"
 
 }
 ul {
@@ -86,32 +86,19 @@ li.dropdown {
 </head>
 <body>
 
-<ul>
-  <li><a href="#home">Home</a></li>
-  <li><a href="#login">Log In</a></li>
-   <li><a href="#signup">Sign Up</a></li>
-    <li><a href="#login">About Us</a></li>
-    <li class="dropdown">
-    <a href="javascript:void(0)" class="dropbtn">View</a>
-    <div class="dropdown-content">
-      <a href="#">Foundation</a>
-      <a href="#">Eyeshadow</a>
-      <a href="#">Lipstick</a>
-    </div>
-  </li>
-</ul>
+{% block content %}
 <br>
 <header>
-    <h1>Product category, ex: "Eyeshadows"</h1>
+    <h1>Category: {{ product.category }}</h1>
 </header>
-<h2>Product name, ex: "Naked 2 Palette"</h2>
-    <p style="float: left; padding: 0px 5px"><img src = http://brtstructures.com/get/files/image/galleries/placeholder-rectangle.jpg?500x240 width = 200px height = 200px border="1px"></p>
+<h2>{{ product.name }}</h2>
+    <p style="float: left; padding: 0px 5px"><img src = "{{ product.image_url }}" alt="{{ product_name }}" width = 200px height = 200px border="1px"></p>
 
 <br>
 
-<p> Price: $x </p>
-<p> Avg. # of Stars: </p>
-<p> Description: </p>
+<p> Price: {{ product.price }} </p>
+<p> Avg. # of Stars: {{ product.average_rating }}</p>
+<p> Description: {{ product.description }}</p>
 <p> Where to buy online (links!): </p>
 
 <br>
@@ -131,12 +118,18 @@ li.dropdown {
     border:1px solid pink;
     padding: 10px;
     margin: 5px;">
-<p> this is where a review goes (username, # of stars, user input) </p>
+
+{% for review in reviews %}
+  <p>{{ review.body }}</p>
+{% endfor %}
+
+<form action="">
+<textarea rows="4" cols="50" name="comment">
+Enter your review on this product!</textarea>
+<input type="submit">
+</form>
+
 </div>
-<div style = "background-color: white;
-    width: 664px;
-    border:1px solid pink;
-    padding: 10px;
-    margin: 5px;">
-<p> this is where a review goes (username, # of stars, user input) </p>
-</div>
+{% endblock %}
+</body>
+</html>

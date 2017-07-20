@@ -3,13 +3,13 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.home, name='home'),
-    url(r'^about-us$', views.about_us, name='about_us'),
+    url(r'^about-us/$', views.about_us, name='about_us'),
 
     #Category search page regex explanation:
     #First character must be a letter
     #After that it can have lowercase letters, -s, and numbers
-    url(r'^product/(?P<productname>[A-Z]|[a-z]([A-Z]|[a-z]|-|\d)*)/$', views.product_detail, name='product_detail'),
-    url(r'^signuplogin$', views.signup_login, name='signup_login'),
+    url(r'^product/(?P<productname>([A-Z]|[a-z])([A-Z]|[a-z]|-|\d)*)/$', views.product_detail, name='product_detail'),
+    url(r'^signuplogin/$', views.signup_login, name='signup_login'),
     url(r'^profile/(?P<username>\w+)$', views.profile_info, name='profile_info'),
     url(r'^category/(?P<categoryname>([A-Z]|[a-z])*)/$', views.category_search, name='category_search'),
 ]

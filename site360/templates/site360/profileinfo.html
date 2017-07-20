@@ -1,19 +1,19 @@
 {% extends 'site360/base.html' %}
 <!DOCTYPE html>
 <html>
-  
-  
+
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+
 <style>
-  
+
 html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 </style>
 <body class="w3-theme-l5">
 
 <!-- Page Container -->
-<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
   <!-- The Grid -->
   <div class="w3-row">
     <!-- Left Column -->
@@ -27,7 +27,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
         </div>
       </div>
       <br>
-      
+
       <!-- Accordion -->
       <div class="w3-card-2 w3-round">
         <div class="w3-white">
@@ -62,11 +62,11 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
            </div>
          </div>
           </div>
-        </div>      
+        </div>
       </div>
       <br>
-      
-      <!-- Interests --> 
+
+      <!-- Interests -->
       <div class="w3-card-2 w3-round w3-white w3-hide-small">
         <div class="w3-container">
           <p>Makeup</p>
@@ -79,18 +79,18 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
           </p>
         </div>
       </div>
-      <br>    
-      
+      <br>
+
       <div class="w3-card-2 w3-round w3-white w3-padding-32 w3-center">
         <p><i class="fa fa-bug w3-xxlarge"></i></p>
       </div>
-      
+
     <!-- End Right Column -->
     </div>
-    
+
   <!-- End Grid -->
   </div>
-  
+
 <!-- End Page Container -->
 </div>
 <br>
@@ -103,7 +103,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 <footer class="w3-container w3-theme-d5">
   <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
 </footer>
- 
+
 <script>
 // Accordion
 function myFunction(id) {
@@ -111,9 +111,9 @@ function myFunction(id) {
     if (x.className.indexOf("w3-show") == -1) {
         x.className += " w3-show";
         x.previousElementSibling.className += " w3-theme-d1";
-    } else { 
+    } else {
         x.className = x.className.replace("w3-show", "");
-        x.previousElementSibling.className = 
+        x.previousElementSibling.className =
         x.previousElementSibling.className.replace(" w3-theme-d1", "");
     }
 }
@@ -123,11 +123,11 @@ function openNav() {
     var x = document.getElementById("navDemo");
     if (x.className.indexOf("w3-show") == -1) {
         x.className += " w3-show";
-    } else { 
+    } else {
         x.className = x.className.replace(" w3-show", "");
     }
 }
 </script>
 
 </body>
-</html> 
+</html>

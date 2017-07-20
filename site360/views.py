@@ -10,7 +10,11 @@ def home(request):
 def product_detail(request, productname):
     formatted_product_name = url_to_product_name(productname)
     product = get_object_or_404(Product, name=formatted_product_name)
-    return render(request, 'site360/product_detail.html', {'product_name': formatted_product_name})
+    reviews = product.review_set.all()
+    author = None
+    if request.user.is_authenticated():
+        author = request.user.username
+    return render(request, 'site360/product_detail.html', {'product_name': formatted_product_name, 'product': product, 'reviews': reviews, 'author': author})
 
 def about_us(request):
     return render(request, 'site360/about_us.html', {})
