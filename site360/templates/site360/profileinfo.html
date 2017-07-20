@@ -29,7 +29,20 @@ $("#imageUpload").change(function(){
     fasterPreview( this );
 });
  
-  #imageUpload
+</script>
+   
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<div id="profile-container">
+   <image id="profileImage" src="http://lorempixel.com/100/100" />
+</div>
+<input id="imageUpload" type="file" 
+       name="profile_photo" placeholder="Photo" required="" capture>
+    
+</body>
+  
+<style>
+ 
+   #imageUpload
 {
     display: none;
 }
@@ -53,30 +66,6 @@ $("#imageUpload").change(function(){
 #profile-container img {
     width: 150px;
     height: 150px;
-}
- 
-</script>
-   
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<div id="profile-container">
-   <image id="profileImage" src="http://lorempixel.com/100/100" />
-</div>
-<input id="imageUpload" type="file" 
-       name="profile_photo" placeholder="Photo" required="" capture>
-    
-</body>
-  
-<style>
- 
- #profile-container {
-    width: 150px;
-    height: 150px;
-    overflow: hidden;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-    border-radius: 50%;
 }
  
   </style>
