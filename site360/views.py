@@ -19,6 +19,7 @@ def product_detail(request, productname):
         if form.is_valid():
             review = form.save(commit=False)
             review.published_date = timezone.now()
+            post.author = request.user
             review.product = product
             review.save()
     else:

@@ -120,7 +120,9 @@ li.dropdown {
     margin: 5px;">
 
 {% for review in reviews %}
-  <p class="groove">{{ review.body }}</p>
+  <p>By <a href="/profile/{{ review.author }}">{{ review.author }}</a></p>
+  <p class="groove">{{ review.body|linebreaksbr }}</p>
+  <br/>
 {% endfor %}
 
 <form method="POST" class="post-form">{% csrf_token %}
