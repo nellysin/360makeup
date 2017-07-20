@@ -12,15 +12,18 @@ def home(request):
 def product_detail(request, productname):
     formatted_product_name = url_to_product_name(productname)
     product = get_object_or_404(Product, name=formatted_product_name)
-    reviews = product.review_set.all()
+    reviews = product.review_set.all().order_by('-date_posted') #Most recent results first
+
     if request.method == "POST":
         form = ReviewForm(request.POST)
         if form.is_valid():
             review = form.save(commit=False)
             review.published_date = timezone.now()
+            review.product = product
             review.save()
     else:
         form = ReviewForm()
+
     return render(request, 'site360/product_detail.html', {'product_name': formatted_product_name, 'product': product, 'reviews': reviews, 'form': form})
 
 def about_us(request):

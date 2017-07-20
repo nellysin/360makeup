@@ -37,8 +37,8 @@ class Product(models.Model):
 class Review(models.Model):
     date_posted = models.DateTimeField(
             default=timezone.now)
-    body = models.CharField(max_length=1000)
-    product = models.ForeignKey(Product)
+    body = models.CharField(max_length=1000, default="Something went wrong and this review did not display.")
+    product = models.ForeignKey(Product, null=True)
 
     def publish(self):
         self.published_date = timezone.now()
