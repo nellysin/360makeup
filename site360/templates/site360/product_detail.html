@@ -120,19 +120,31 @@ li.dropdown {
     margin: 5px;">
 
 {% for review in reviews %}
-  <p>By <a href="/profile/{{ review.author }}">{{ review.author }}</a></p>
+  <p><a href="/profile/{{ review.author }}">{{ review.author }}</a> says:</p>
   <p class="groove">{{ review.body|linebreaksbr }}</p>
   <br/>
 {% endfor %}
+</div>
 
 {% if user.is_authenticated %}
-  <form method="POST" class="post-form">{% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="save btn btn-default">Publish</button>
-  </form>
+  <div style = "background-color: #FFC2E0;
+      width: 664px;
+      border:1px ;
+      padding: 0px;
+      margin: 0px;">
+  <h2>Write a Review</h2> </div>
+  <div style = "background-color: white;
+      width: 664px;
+      border:1px solid pink;
+      padding: 10px;
+      margin: 5px;">
+    <form method="POST" class="post-form">{% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="save btn btn-default">Publish</button>
+    </form>
+  </div>
 {% endif %}
 
-</div>
 {% endblock %}
 </body>
 </html>
