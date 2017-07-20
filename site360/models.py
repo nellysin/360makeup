@@ -17,12 +17,20 @@ class User(models.Model):
     def __str__(self):
         return self.username
 
+
 class Product(models.Model):
     name = models.CharField(max_length=100)
+    created_date = models.DateTimeField(default=timezone.now)
     company = models.CharField(max_length=100)
+    image_url = models.URLField()
     description = models.TextField()
     category = models.CharField(max_length=20, default="Miscellaneous")
-    created_date = models.DateTimeField(default=timezone.now)
+    price = models.DecimalField(max_digits=10,decimal_places=2)
+    average_rating = models.FloatField()
+    number_of_ratings = models.IntegerField()
 
     def __str__(self):
         return self.name
+
+    def name_to_url(self):
+        return self.name.replace(" ", "-")
