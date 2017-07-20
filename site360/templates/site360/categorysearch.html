@@ -1,21 +1,32 @@
 {% extends 'site360/base.html' %}
 
+
 <!DOCTYPE html>
 <html>
 
 <body>
-
 {% block content %}
-
-{% for product in products %}
-    <a href="/product/{{ product.name_to_url }}/"><h2>{{ product.name }}</h2></a>
-    <img src="{{ product.image_url }}" alt="A picture of {{ product.name }}"/>
-    <p>{{ product.company }}</p>
-    <p>Average stars: {{ product.average_rating }}</p>
-    <p>{{ product.description }}</p>
-{% endfor %}
-
+<style>
+img.preview
+{
+  height: 25%;
+  width: 25%;
+}
+</style>
+  <br>
+      <div style = "margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #FFC2E0;">
+    <h2>Category: {{ category }}</h2>
+    </div>
+    {% for product in products %}
+       <a STYLE="text-decoration:none" href="/product/{{ product.name_to_url }}"><h2 style = "color:black">{{ product.name }}</h2></a>
+      <img class = "preview" src="{{ product.image_url }}" alt="A picture of {{ product.name }}"/>
+      <p><i><b>{{ product.company }}</b></i></p>
+      <p><b>Average stars:</b> {{ product.average_rating }}</p>
+      <p><b>Price:</b> ${{ product.price }} </p>
+    {% endfor %}
 {% endblock %}
-
 </body>
 </html>

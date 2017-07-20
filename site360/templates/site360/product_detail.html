@@ -96,9 +96,9 @@ li.dropdown {
 
 <br>
 
-<p> Price: {{ product.price }} </p>
+<p> Price: ${{ product.price }} </p>
 <p> Avg. # of Stars: {{ product.average_rating }}</p>
-<p> Description: {{ product.description }}</p>
+<p> Description: {{ product.description|linebreaksbr }}</p>
 <p> Where to buy online (links!): </p>
 
 <br>
@@ -123,10 +123,9 @@ li.dropdown {
   <p>{{ review.body }}</p>
 {% endfor %}
 
-<form action="">
-<textarea rows="4" cols="50" name="comment">
-Enter your review on this product!</textarea>
-<input type="submit">
+<form method="POST" class="post-form">{% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="save btn btn-default">Publish</button>
 </form>
 
 </div>

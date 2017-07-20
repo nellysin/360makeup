@@ -1,8 +1,6 @@
 from django.db import models
 from django.utils import timezone
 
-
-
 class User(models.Model):
     #IN PROGRESS
     username = models.CharField(max_length=20)
@@ -17,7 +15,6 @@ class User(models.Model):
 
     def __str__(self):
         return self.username
-
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
@@ -42,3 +39,7 @@ class Review(models.Model):
             default=timezone.now)
     body = models.CharField(max_length=1000)
     product = models.ForeignKey(Product)
+
+    def publish(self):
+        self.published_date = timezone.now()
+        self.save()
