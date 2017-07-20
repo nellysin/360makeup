@@ -12,4 +12,6 @@ urlpatterns = [
     url(r'^signuplogin/$', views.signup_login, name='signup_login'),
     url(r'^profile/(?P<username>\w+)$', views.profile_info, name='profile_info'),
     url(r'^category/(?P<categoryname>([A-Z]|[a-z])*)/$', views.category_search, name='category_search'),
+    #Delete later
+    url(r'testprofile/$', views.test_profile, name="test_profile")
 ]
