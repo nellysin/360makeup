@@ -10,15 +10,16 @@
 {% block content %}
 <div id="wrapper">
 
-<!--Login form-->
 <div class="form_div">
-<p class="form_label">LOGIN</p>
+<p class="form_label">LOG IN</p>
+<!--
 <form method="post" action="">
 <p><input type="text" placeholder="Enter Email"></p>
 <p><input type="password" placeholder="**********"></p>
 <p><input type="submit" value="LOGIN"></p>
 </form>
 <br/>
+-->
 <form method="post">
   {% csrf_token %}
   {{ form.as_p }}
@@ -29,9 +30,10 @@
 
 <br>
 <br>
-<!--Signup form-->
+
+<!--
 <div class="form_div">
-<p class="form_label">SIGNUP</p>
+<p class="form_label">SIGN UP</p>
 <form method="post" action="">
 <p><input type="text" placeholder="Enter Name"></p>
 <p><input type="text" placeholder="Enter Email"></p>
@@ -39,6 +41,7 @@
 <p><input type="submit" value="SIGNUP"></p>
 </form>
 </div>
+-->
 
 </div>
 </body>
