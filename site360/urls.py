@@ -14,7 +14,7 @@ urlpatterns = [
     url(r'^product/(?P<productname>([A-Z]|[a-z])([A-Z]|[a-z]|-|\d)*)/$', views.product_detail, name='product_detail'),
 
     # User-related pages
-    url(r'^login/$', auth_views.login, {'template_name': '/360/site360/templates/site360/signuplogin.html'}, name='signup_login'),
+    url(r'^login/$', auth_views.login, {'template_name': 'site360/signuplogin.html'}, name='signup_login'),
     url(r'^logout/$', auth_views.logout, {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
     url(r'^profile/(?P<username>\w+)$', views.profile_info, name='profile_info'),
 
