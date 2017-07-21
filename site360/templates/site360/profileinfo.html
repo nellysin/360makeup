@@ -11,28 +11,28 @@
    
    <h3>Your Profile</h3>
    
-<script>
+<script type= "text/javascript">
  $("#profileImage").click(function(e) {
     $("#imageUpload").click();
 });
 
-function fasterPreview( uploader ) {
-    if ( uploader.files && uploader.files[0] ){
-          $('#profileImage').attr('src', 
-             window.URL.createObjectURL(uploader.files[0]) );
+function previewProfileImage( uploader ) {   
+    //ensure a file was selected 
+    if (uploader.files && uploader.files[0]) {
+        var imageFile = uploader.files[0];
+        var reader = new FileReader();    
+        reader.onload = function (e) {
+            //set the image data as source
+            $('#profileImage').attr('src', e.target.result);
+        }    
+        reader.readAsDataURL( imageFile );
     }
 }
- 
+
 $("#imageUpload").change(function(){
-    fasterPreview( this );
+    previewProfileImage( this );
 });
  
-function fasterPreview( uploader ) {
-    if ( uploader.files && uploader.files[0] ){
-          $('#profileImage').attr('src', 
-             window.URL.createObjectURL(uploader.files[0]) );
-    }
-} 
  
 </script>
 
