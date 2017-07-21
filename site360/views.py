@@ -1,9 +1,10 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
-from .models import Product, User
+from .models import Product
 from .forms import ReviewForm
 
 def url_to_product_name(url):
