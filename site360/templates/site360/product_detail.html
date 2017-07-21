@@ -119,11 +119,15 @@ li.dropdown {
     padding: 10px;
     margin: 5px;">
 
-{% for review in reviews %}
-  <p><a href="/profile/{{ review.author }}">{{ review.author }}</a> says:</p>
-  <p class="groove">{{ review.body|linebreaksbr }}</p>
-  <br/>
-{% endfor %}
+{% if review_count %}
+  {% for review in reviews %}
+    <p><a href="/profile/{{ review.author }}">{{ review.author }}</a> says:</p>
+    <p class="groove">{{ review.body|linebreaksbr }}</p>
+    <br/>
+  {% endfor %}
+{% else %}
+  <p>No reviews yet.</p>
+{% endif %}
 </div>
 
 {% if user.is_authenticated %}

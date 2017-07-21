@@ -21,7 +21,8 @@ def product_detail(request, productname):
     if not correct_product:
         raise Http404("Product does not exist")
 
-    reviews = product.review_set.all().order_by('-date_posted') #Most recent results first
+    reviews = correct_product.review_set.all().order_by('-date_posted') #Most recent reviews first
+    review_count = reviews.count()
 
     if request.method == "POST":
         form = ReviewForm(request.POST)
@@ -29,12 +30,14 @@ def product_detail(request, productname):
             review = form.save(commit=False)
             review.published_date = timezone.now()
             review.author = request.user
-            review.product = product
+            review.product = correct_product
             review.save()
+            reviews = correct_product.review_set.all().order_by('-date_posted') #Most recent reviews first
+            review_count = reviews.count()
     else:
         form = ReviewForm()
 
-    return render(request, 'site360/product_detail.html', {'product_name': correct_product.name, 'product': correct_product, 'reviews': reviews, 'form': form})
+    return render(request, 'site360/product_detail.html', {'product_name': correct_product.name, 'product': correct_product, 'reviews': reviews, 'form': form, 'review_count': review_count})
 
 def about_us(request):
     return render(request, 'site360/about_us.html', {})
