@@ -18,6 +18,12 @@
 <p><input type="password" placeholder="**********"></p>
 <p><input type="submit" value="LOGIN"></p>
 </form>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Login</button>
+</form>
 </div>
 <br>
 <br>

@@ -1,3 +1,4 @@
+from django.contrib.auth import authenticate, login
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
@@ -43,6 +44,14 @@ def about_us(request):
     return render(request, 'site360/about_us.html', {})
 
 def signup_login(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        # Redirect to a success page.
+    else:
+        pass # Return an 'invalid login' error message.
     return render(request, 'site360/signuplogin.html', {})
 
 def profile_info(request, username):
