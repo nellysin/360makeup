@@ -21,7 +21,7 @@ img.preview
     <h2>Category: {{ category.capitalize }}</h2>
     </div>
     {% for product in products %}
-       <a STYLE="text-decoration:none" href="/product/{{ product.name_to_url }}"><h2 style = "color:black">{{ product.full_name }}</h2></a>
+       <a STYLE="text-decoration:none" href="/product/{{ product.name_to_url }}"><h2 style = "color:black">{{ product.name }}</h2></a>
       <img src="{{ product.image_url }}" alt="A picture of {{ product.name }}" width=10% height=10%/>
       <p><i><b>{{ product.company }}</b></i></p>
       <p><b>Average stars:</b> {{ product.average_rating }}</p>

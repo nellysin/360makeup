@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from .models import Product, User
@@ -10,8 +11,16 @@ def home(request):
     return render(request, 'site360/home.html', {})
 
 def product_detail(request, productname):
-    formatted_product_name = url_to_product_name(productname)
-    product = get_object_or_404(Product, name=formatted_product_name)
+    all_products = Product.objects.all()
+    correct_product = 0
+    for product in all_products:
+        if product.name_to_url() == productname:
+            correct_product = product
+    #correct_product = get_object_or_404(Product, name=formatted_product_name)
+
+    if not correct_product:
+        raise Http404("Product does not exist")
+
     reviews = product.review_set.all().order_by('-date_posted') #Most recent results first
 
     if request.method == "POST":
@@ -25,7 +34,7 @@ def product_detail(request, productname):
     else:
         form = ReviewForm()
 
-    return render(request, 'site360/product_detail.html', {'product_name': formatted_product_name, 'product': product, 'reviews': reviews, 'form': form})
+    return render(request, 'site360/product_detail.html', {'product_name': correct_product.name, 'product': correct_product, 'reviews': reviews, 'form': form})
 
 def about_us(request):
     Product.objects.filter(full_name="").update(full_name="a")
