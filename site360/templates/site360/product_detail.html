@@ -130,7 +130,6 @@ li.dropdown {
 {% endif %}
 </div>
 
-{% if user.is_authenticated %}
   <div style = "background-color: #FFC2E0;
       width: 664px;
       border:1px ;
@@ -142,12 +141,15 @@ li.dropdown {
       border:1px solid pink;
       padding: 10px;
       margin: 5px;">
-    <form method="POST" class="post-form">{% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit" class="save btn btn-default">Publish</button>
-    </form>
+    {% if user.is_authenticated %}
+      <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Publish</button>
+      </form>
+    {% else %}
+      <p><a href='/login'>Log in</a> to write a review!</p>
+    {% endif %}
   </div>
-{% endif %}
 
 {% endblock %}
 </body>
