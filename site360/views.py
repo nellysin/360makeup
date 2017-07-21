@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import UserCreationForm
 from django.http import Http404
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 from .models import Product, User
 from .forms import ReviewForm
@@ -53,6 +54,20 @@ def signup_login(request):
     else:
         pass # Return an 'invalid login' error message.
     return render(request, 'site360/signuplogin.html', {})
+
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('/')
+    else:
+        form = UserCreationForm()
+    return render(request, 'site360/signup.html', {'form': form})
 
 def profile_info(request, username):
     product = get_object_or_404(User, username=username)
