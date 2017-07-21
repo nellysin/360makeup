@@ -8,6 +8,10 @@
   </head>
 <style>
  
+ body{
+  
+ }
+ 
    #imageUpload
 {
     display: none;
@@ -40,7 +44,7 @@
    
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <div id="profile-container">
-   <image id="profileImage" src="http://lorempixel.com/100/100" />
+   <image id="profileImage" src="http://www.gibbahouse.com/wp-content/uploads/2014/12/Funny-Animals-With-Makeup_2.jpg" />
 </div>
 <input id="imageUpload" type="file" 
        name="profile_photo" placeholder="Photo" required="" capture>  
@@ -63,7 +67,7 @@ function fasterPreview( uploader ) {
 $("#imageUpload").change(function(){
     fasterPreview( this );
 });
-    
+  
 </script>
  </body>
   {% endblock %}
