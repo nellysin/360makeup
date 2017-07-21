@@ -28,6 +28,7 @@ def product_detail(request, productname):
     return render(request, 'site360/product_detail.html', {'product_name': formatted_product_name, 'product': product, 'reviews': reviews, 'form': form})
 
 def about_us(request):
+    Product.objects.filter(full_name="").update(full_name="a")
     return render(request, 'site360/about_us.html', {})
 
 def signup_login(request):

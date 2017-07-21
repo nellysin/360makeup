@@ -18,6 +18,7 @@ class User(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
+    full_name = models.CharField(max_length=100, default="a", null=True)
     created_date = models.DateTimeField(default=timezone.now)
     company = models.CharField(max_length=100)
     image_url = models.URLField()
@@ -33,7 +34,6 @@ class Product(models.Model):
     def name_to_url(self):
         return self.name.replace(" ", "-")
 
-
 class Review(models.Model):
     date_posted = models.DateTimeField(
             default=timezone.now)
@@ -43,4 +43,17 @@ class Review(models.Model):
 
     def publish(self):
         self.published_date = timezone.now()
+        self.save()
+
+class Rating(models.Model):
+    rating = models.DecimalField(max_digits=2, decimal_places=1)
+    reviewer = models.ForeignKey('auth.User', null=True)
+
+    def __int__(self):
+        return self.rating
+
+    def __str__(self):
+        return str(self.rating)
+
+    def publish(self):
         self.save()
