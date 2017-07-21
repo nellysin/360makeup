@@ -5,7 +5,7 @@
 <head>
 {% block content %}
 
-     
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 * {box-sizing:border-box}
@@ -63,12 +63,12 @@ body {font-family: Verdana,sans-serif;}
 }
 
 @-webkit-keyframes fade {
-  from {opacity: .4} 
+  from {opacity: .4}
   to {opacity: 1}
 }
 
 @keyframes fade {
-  from {opacity: .4} 
+  from {opacity: .4}
   to {opacity: 1}
 }
 
@@ -80,6 +80,7 @@ body {font-family: Verdana,sans-serif;}
 </head>
 <body>
 
+<br/>
 
 <div class="slideshow-container">
 
@@ -110,10 +111,10 @@ body {font-family: Verdana,sans-serif;}
 <br>
 
 <div style="text-align:center">
-  <span class="dot"></span> 
-  <span class="dot"></span> 
   <span class="dot"></span>
-  <span class="dot"></span> 
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
 </div>
 
 <script>
@@ -125,14 +126,14 @@ function showSlides() {
     var slides = document.getElementsByClassName("mySlides");
     var dots = document.getElementsByClassName("dot");
     for (i = 0; i < slides.length; i++) {
-       slides[i].style.display = "none";  
+       slides[i].style.display = "none";
     }
     slideIndex++;
-    if (slideIndex> slides.length) {slideIndex = 1}    
+    if (slideIndex> slides.length) {slideIndex = 1}
     for (i = 0; i < dots.length; i++) {
         dots[i].className = dots[i].className.replace(" active", "");
     }
-    slides[slideIndex-1].style.display = "block";  
+    slides[slideIndex-1].style.display = "block";
     dots[slideIndex-1].className += " active";
     setTimeout(showSlides, 3000); // Change image every 2 seconds
 }
@@ -140,10 +141,10 @@ function showSlides() {
 
 <body>
      <div style="background-color:#FFC2E0;color:black;padding:20px;">
- <h1>Krupa</h1>
-<p>I am 17 years old. I am attending Galileo High School currently as a senior.
 <h1>Nelly</h1>
 <p>I am 16 years old. I currently attend Galileo High School as a junior.</p>
+<h1>Krupa</h1>
+<p>I am 17 years old. I am attending Galileo High School currently as a senior.
 <h1>Mikaela</h1>
 <p>I am 16 years old. I am attending Castro Valley High as a senior.</p>
 <h1>Nory</h1>
@@ -152,5 +153,3 @@ function showSlides() {
 </body>
 {% endblock %}
 </html>
-
-
