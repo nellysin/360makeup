@@ -4,7 +4,10 @@
 <head>
 
   <title> Your Profile </title>
-
+<!--stylesheet-->
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+ 
   </head>
 <style>
  
@@ -38,9 +41,40 @@
     height: 150px;
 }
  
+.mySlides {display:none}
+
+.demo {cursor:pointer}
+
+body{
+text-align:center;
+} 
  
   </style>
   <body>
+   
+   <div class="w3-container">
+  <h2>Favorites</h2>
+
+
+<div class="w3-content" style="max-width:1200px">
+  <img class="mySlides" src="http://cdn.theeverygirl.com/wp-content/uploads/2015/12/theeverygirl-secrets-from-a-makeup-artist-10-must-haves-at-sephora209.jpg" style="width:100%">
+  <img class="mySlides" src="http://www.sephora.com/productimages/sku/s1258284-main-Lhero.jpg" style="width:100%">
+  <img class="mySlides" src="https://s-media-cache-ak0.pinimg.com/originals/fd/ab/66/fdab66685b33c765ccaa00e2ae7b0a57.jpg" style="width:100%">
+
+  <div class="w3-row-padding w3-section">
+    <div class="w3-col s4">
+      <img class="demo w3-opacity w3-hover-opacity-off" src="http://cdn.theeverygirl.com/wp-content/uploads/2015/12/theeverygirl-secrets-from-a-makeup-artist-10-must-haves-at-sephora209.jpg" style="width:100%" onclick="currentDiv(1)">
+    </div>
+    <div class="w3-col s4">
+      <img class="demo w3-opacity w3-hover-opacity-off" src="http://www.sephora.com/productimages/sku/s1258284-main-Lhero.jpg" style="width:100%" onclick="currentDiv(2)">
+    </div>
+    <div class="w3-col s4">
+      <img class="demo w3-opacity w3-hover-opacity-off" src="https://s-media-cache-ak0.pinimg.com/originals/fd/ab/66/fdab66685b33c765ccaa00e2ae7b0a57.jpg" style="width:100%" onclick="currentDiv(3)">
+    </div>
+  </div>
+</div>
+   
+      <h3>Your Profile</h3>
    
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <div id="profile-container">
@@ -49,10 +83,35 @@
 <input id="imageUpload" type="file" 
        name="profile_photo" placeholder="Photo" required="" capture>  
    
-   <h3>Your Profile</h3>
-   
 <script type= "text/javascript">
 
+ var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function currentDiv(n) {
+  showDivs(slideIndex = n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+     dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
+  }
+  x[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " w3-opacity-off";
+}
+ 
          $("#profileImage").click(function(e) {
     $("#imageUpload").click();
 });
