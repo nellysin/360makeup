@@ -18,14 +18,15 @@
 <p><input type="password" placeholder="**********"></p>
 <p><input type="submit" value="LOGIN"></p>
 </form>
-
+<br/>
 <form method="post">
   {% csrf_token %}
   {{ form.as_p }}
-  <button type="submit">Login</button>
+  <p><input type="submit" value="LOGIN"></p>
 </form>
 </div>
 <br>
+
 <br>
 <br>
 <!--Signup form-->
