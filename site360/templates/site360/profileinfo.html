@@ -15,6 +15,13 @@
    <image id="profileImage" src="aDefaultImage.png" />
 </div>   
     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<div id="profile-container">
+   <image id="profileImage" src="http://lorempixel.com/100/100" />
+</div>
+<input id="imageUpload" type="file" 
+       name="profile_photo" placeholder="Photo" required="" capture>  
+   
 <script>
  $("#profileImage").click(function(e) {
     $("#imageUpload").click();
@@ -31,16 +38,10 @@ $("#imageUpload").change(function(){
     fasterPreview( this );
 });
  
-</script>
-    
-</body>
 
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<div id="profile-container">
-   <image id="profileImage" src="http://lorempixel.com/100/100" />
-</div>
-<input id="imageUpload" type="file" 
-       name="profile_photo" placeholder="Photo" required="" capture> 
+ 
+</script>
+</body>
  
 <style>
  
@@ -63,6 +64,7 @@ $("#imageUpload").change(function(){
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
     border-radius: 50%;
+    text-align:center;
 }
 
 #profile-container img {
@@ -74,7 +76,6 @@ $("#imageUpload").change(function(){
  
  body{
   text-align:center;
-  align-item:center;
  }
  
   </style>
