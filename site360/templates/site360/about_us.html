@@ -5,27 +5,52 @@
 <head>
 {% block content %}
 
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 * {box-sizing:border-box}
-body {font-family: Verdana,sans-serif;}
+body {font-family: Verdana,sans-serif;margin:0}
 .mySlides {display:none}
 
 /* Slideshow container */
 .slideshow-container {
-  max-width: 400px;
+  max-width: 300px;
   position: relative;
   margin: auto;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 40px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
 }
 
 /* Caption text */
 .text {
   color: white;
-  font-size: 40px;
+  font-size: 15px;
   padding: 8px 12px;
   position: absolute;
-  bottom: 600px;
+  bottom: 8px;
   width: 100%;
   text-align: center;
 }
@@ -41,6 +66,7 @@ body {font-family: Verdana,sans-serif;}
 
 /* The dots/bullets/indicators */
 .dot {
+  cursor:pointer;
   height: 13px;
   width: 13px;
   margin: 0 2px;
@@ -50,7 +76,7 @@ body {font-family: Verdana,sans-serif;}
   transition: background-color 0.6s ease;
 }
 
-.active {
+.active, .dot:hover {
   background-color: #717171;
 }
 
@@ -63,37 +89,35 @@ body {font-family: Verdana,sans-serif;}
 }
 
 @-webkit-keyframes fade {
-  from {opacity: .4}
+  from {opacity: .4} 
   to {opacity: 1}
 }
 
 @keyframes fade {
-  from {opacity: .4}
+  from {opacity: .4} 
   to {opacity: 1}
 }
 
 /* On smaller screens, decrease text size */
 @media only screen and (max-width: 300px) {
-  .text {font-size: 11px}
+  .prev, .next,.text {font-size: 11px}
 }
 </style>
 </head>
 <body>
 
-<br/>
-
 <div class="slideshow-container">
 
 <div class="mySlides fade">
   <div class="numbertext">1 / 4</div>
-  <img src="https://github.com/nellysin/360makeup/blob/master/site360/images/photo0.jpg?raw=true" style="width:100%">
-  <div class="text">Nelly</div>
+  <img src="https://github.com/nellysin/360makeup/blob/master/site360/images/profilepic.jpg?raw=true" style="width:100%">
+  <div class="text">Krupa</div>
 </div>
 
 <div class="mySlides fade">
   <div class="numbertext">2 / 4</div>
-  <img src="https://github.com/nellysin/360makeup/blob/master/site360/images/profilepic.jpg?raw=true" style="width:100%">
-  <div class="text">Krupa</div>
+  <img src="https://github.com/nellysin/360makeup/blob/master/site360/images/photo0.jpg?raw=true" style="width:100%">
+  <div class="text">Nelly</div>
 </div>
 
 <div class="mySlides fade">
@@ -104,47 +128,57 @@ body {font-family: Verdana,sans-serif;}
 
 <div class="mySlides fade">
   <div class="numbertext">4 / 4</div>
-  <img src="http://i.imgur.com/QqgNuRh.jpg?1">
+  <img src="http://i.imgur.com/QqgNuRh.jpg?1" style="width:100%">
   <div class="text">Nory</div>
+</div>
+
+<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+<a class="next" onclick="plusSlides(1)">&#10095;</a>
 
 </div>
 <br>
 
 <div style="text-align:center">
-  <span class="dot"></span>
-  <span class="dot"></span>
-  <span class="dot"></span>
-  <span class="dot"></span>
+  <span class="dot" onclick="currentSlide(1)"></span> 
+  <span class="dot" onclick="currentSlide(2)"></span> 
+  <span class="dot" onclick="currentSlide(3)"></span>
+  <span class="dot" onclick="currentSlide(4)"></span> 
 </div>
 
 <script>
-var slideIndex = 0;
-showSlides();
+var slideIndex = 1;
+showSlides(slideIndex);
 
-function showSlides() {
-    var i;
-    var slides = document.getElementsByClassName("mySlides");
-    var dots = document.getElementsByClassName("dot");
-    for (i = 0; i < slides.length; i++) {
-       slides[i].style.display = "none";
-    }
-    slideIndex++;
-    if (slideIndex> slides.length) {slideIndex = 1}
-    for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-    }
-    slides[slideIndex-1].style.display = "block";
-    dots[slideIndex-1].className += " active";
-    setTimeout(showSlides, 3000); // Change image every 2 seconds
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
 }
 </script>
-
 <body>
      <div style="background-color:#FFC2E0;color:black;padding:20px;">
+<h1>Krupa</h1>
+<p>I am a typical teenager who is in love with makeup. Yet, whenever buying makeup I always have a struggle finding the best high end or drugstore brand that is suited for my skin or complexion. This website is designed to help people with the same struggles as me and anyone new to makeup who has decided to hop in the complexity of this world.I am 16 years old. I currently attend Galileo High School as a junior.</p>
 <h1>Nelly</h1>
 <p>I am 16 years old. I currently attend Galileo High School as a junior.</p>
-<h1>Krupa</h1>
-<p>I am 17 years old. I am attending Galileo High School currently as a senior.
 <h1>Mikaela</h1>
 <p>I am 16 years old. I am attending Castro Valley High as a senior.</p>
 <h1>Nory</h1>
