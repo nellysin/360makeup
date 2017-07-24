@@ -57,7 +57,7 @@ def product_detail(request, productname):
         else:
             rating = current_user_ratings[0]
             rating.rating = current_rating
-        
+
         rating.save()
 
         #average_rating = models.FloatField()
@@ -101,6 +101,11 @@ def signup_login(request):
     if user is not None:
         login(request, user)
         # Redirect to a success page.
+        user_profile = Profile.objects.filter(user=user)
+        if user_profile.count() == 0:
+            profile = Profile()
+            profile.user = user
+            profile.save()
     else:
         pass # Return an 'invalid login' error message.
     return render(request, 'site360/signuplogin.html', {})
@@ -122,6 +127,7 @@ def signup(request):
 def profile_info(request, username):
     user = get_object_or_404(User, username=username)
     profile = Profile.objects.filter(user=user)[0]
+    # TO DO: IF USER TRIES TO GET PROFILE, CREATE NEW PROFILE
     favorites = Favorite.objects.filter(user=user).all()
 
     picture_url = profile.picture_url
@@ -132,6 +138,7 @@ def profile_info(request, username):
         if form.is_valid():
             profile.picture_url = form.save(commit=False)
             picture_url = profile.picture_url
+            profile.user = user
             profile.save()
     else:
         form = ProfilePictureForm()

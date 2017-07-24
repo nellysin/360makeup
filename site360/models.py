@@ -65,12 +65,12 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
-# Credit to Simpleisbetterthancomplex
-@receiver(post_save, sender=User)
-def update_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-    instance.profile.save()
+# # Credit to Simpleisbetterthancomplex
+# @receiver(post_save, sender=User)
+# def update_user_profile(sender, instance, created, **kwargs):
+#     if created:
+#         Profile.objects.create(user=instance)
+#     instance.profile.save()
 
 class Favorite(models.Model):
     user = models.ForeignKey('auth.User', related_name='favorite_user', null=True)
@@ -84,5 +84,3 @@ class Favorite(models.Model):
     def publish(self):
         self.published_date = timezone.now()
         self.save()
-
-
