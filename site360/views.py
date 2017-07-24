@@ -47,15 +47,15 @@ def product_detail(request, productname):
                 current_url = request.get_full_path().split("?")[0]
                 return redirect(current_url)
 
-
     # Calculate and store ratings
     # *WEEPS* FORGIVE ME
     current_url = request.get_full_path()
+    rated_users = Rating.objects.filter(product=correct_product) # Ratings of users who rated this product
+    rated_users_list = {rating.reviewer: rating.rating for rating in rated_users}
+    current_user_ratings = rated_users.filter(reviewer=request.user).all()
     if "?ratebutton=Give" in current_url:
         current_split_url = current_url.split("?ratebutton=Give+this+product+")
         current_rating = current_split_url[1][0]
-        rated_users = Rating.objects.filter(product=correct_product) # Users who rated this product
-        current_user_ratings = rated_users.filter(reviewer=request.user).all()
         if current_user_ratings.count() == 0: # User has rated product for the first time
             rating = Rating()
             rating.product = correct_product
@@ -100,7 +100,7 @@ def product_detail(request, productname):
     else:
         form = ReviewForm()
 
-    return render(request, 'site360/product_detail.html', {'product_name': correct_product.name, 'product': correct_product, 'reviews': reviews, 'form': form, 'review_count': review_count, 'is_product_favorite': is_product_favorite})
+    return render(request, 'site360/product_detail.html', {'product_name': correct_product.name, 'product': correct_product, 'reviews': reviews, 'form': form, 'review_count': review_count, 'is_product_favorite': is_product_favorite, 'rated_users_list': rated_users_list})
 
 def about_us(request):
     return render(request, 'site360/about_us.html', {})

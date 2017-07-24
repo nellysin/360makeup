@@ -174,6 +174,11 @@ li.dropdown {
 {% if review_count %}
   {% for review in reviews %}
     <p><a href="/profile/{{ review.author }}">{{ review.author }}</a> says:</p>
+    {% if review.author in rated_users_list.keys %}
+      <p>{{ rated_users_list.review.author }}</p>
+    {% else %}
+      <p>This user hasn't rated the product yet.</p>
+    {% endif %}
     <p class="groove">{{ review.body|linebreaksbr }}</p>
     <br/>
   {% endfor %}
