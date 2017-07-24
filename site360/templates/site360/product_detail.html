@@ -115,7 +115,7 @@ li.dropdown {
     <img src="http://imgur.com/FdlPxEa.png" class="star" onclick=darkenStars(3) width=32px height=32px>
     <img src="http://imgur.com/FdlPxEa.png" class="star" onclick=darkenStars(4) width=32px height=32px>
     <img src="http://imgur.com/FdlPxEa.png" class="star" onclick=darkenStars(5) width=32px height=32px>
-    <p><input type="submit" value="Give this product 5 stars" id="favoritebutton" name="favoritebutton"></p>
+    <p><input type="submit" value="Give this product 5 stars" id="ratebutton" name="ratebutton"></p>
   </form>
 
   <script>
@@ -133,7 +133,7 @@ li.dropdown {
       } else {
         var new_button_value = "Give this product ".concat(darkened_stars, " stars");
       }
-      document.getElementById("favoritebutton").setAttribute("value", new_button_value);
+      document.getElementById("ratebutton").setAttribute("value", new_button_value);
     }
   </script>
 
@@ -146,7 +146,7 @@ li.dropdown {
 {% if user.is_authenticated %}
   {% if is_product_favorite %}
   <form action="" method="get">
-      <p><input type="button" value="Remove from favorites" name="removefavoritebutton"></p>
+      <p><input type="submit" value="Remove from favorites" name="removefavoritebutton"></p>
     </form>
   {% else %}
     <form action="" method="get">

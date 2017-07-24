@@ -29,21 +29,30 @@ def product_detail(request, productname):
     is_product_favorite = False
     favorite_users = Favorite.objects.filter(product=correct_product)
     # If the current user has not yet favorited this product:
-    if favorite_users.filter(user=request.user).count() == 0:
-        is_product_favorite = False
-        if(request.GET.get('favoritebutton')):
-            favorite = Favorite()
-            favorite.product = correct_product
-            favorite.user = request.user
-            favorite.save()
-    else:
-        is_product_favorite = True
+    if request.user.is_authenticated:
+        current_user_favorite = favorite_users.filter(user=request.user)
+        if current_user_favorite.count() == 0:
+            is_product_favorite = False
+            if request.GET.get('favoritebutton'):
+                favorite = Favorite()
+                favorite.product = correct_product
+                favorite.user = request.user
+                favorite.save()
+                current_url = request.get_full_path().split("?")[0]
+                return redirect(current_url)
+        else:
+            is_product_favorite = True
+            if request.GET.get('removefavoritebutton'):
+                current_user_favorite.delete()
+                current_url = request.get_full_path().split("?")[0]
+                return redirect(current_url)
+
 
     # Calculate and store ratings
     # *WEEPS* FORGIVE ME
     current_url = request.get_full_path()
-    if "?favoritebutton=Give" in current_url:
-        current_split_url = current_url.split("?favoritebutton=Give+this+product+")
+    if "?ratebutton=Give" in current_url:
+        current_split_url = current_url.split("?ratebutton=Give+this+product+")
         current_rating = current_split_url[1][0]
         rated_users = Rating.objects.filter(product=correct_product) # Users who rated this product
         current_user_ratings = rated_users.filter(reviewer=request.user).all()
