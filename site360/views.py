@@ -98,7 +98,6 @@ def signup_login(request):
     username = request.POST['username']
     password = request.POST['password']
     user = authenticate(request, username=username, password=password)
-    print('ahs')
     if user is not None:
         login(request, user)
         # Redirect to a success page.
@@ -127,12 +126,13 @@ def signup(request):
 
 def profile_info(request, username):
     user = get_object_or_404(User, username=username)
-    profile = Profile.objects.filter(user=user)[0]
+    #profile = Profile.objects.filter(user=user)[0]
     # TO DO: IF USER TRIES TO GET PROFILE, CREATE NEW PROFILE
     favorites = Favorite.objects.filter(user=user).all()
 
-    picture_url = profile.picture_url
+    #picture_url = profile.picture_url
 
+    """
     # THIS DOESN'T WORK
     if request.method == "POST":
         form = ProfilePictureForm(request.POST)
@@ -143,8 +143,9 @@ def profile_info(request, username):
             profile.save()
     else:
         form = ProfilePictureForm()
+    """
 
-    return render(request, 'site360/profileinfo.html', {'username': username, 'favorites': favorites, 'picture_url': picture_url, 'form': form})
+    return render(request, 'site360/profileinfo.html', {'username': username, 'favorites': favorites})
 
 def category_search(request, categoryname):
     products = Product.objects.filter(category = categoryname).order_by('-average_rating')
