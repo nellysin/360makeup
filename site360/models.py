@@ -13,7 +13,7 @@ class Product(models.Model):
     description = models.TextField()
     category = models.CharField(max_length=20, default="Miscellaneous")
     price = models.DecimalField(max_digits=10,decimal_places=2)
-    average_rating = models.FloatField()
+    average_rating = models.DecimalField(max_digits=2,decimal_places=1)
     number_of_ratings = models.IntegerField()
 
     def __str__(self):
