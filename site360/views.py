@@ -25,7 +25,7 @@ def product_detail(request, productname):
     if not correct_product:
         raise Http404('Product does not exist')
 
-    correctproduct = correct_product
+    is_product_favorite = False
     if(request.GET.get('favoritebutton')):
         favorite_users = Favorite.objects.filter(product=correct_product)
         # If the current user has not yet this product:
