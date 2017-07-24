@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
+from django.template.defaulttags import register
 from django.utils import timezone
 from .models import Product, Favorite, Rating, Profile
 from .forms import ReviewForm, ProfilePictureForm
@@ -51,7 +52,8 @@ def product_detail(request, productname):
     # *WEEPS* FORGIVE ME
     current_url = request.get_full_path()
     rated_users = Rating.objects.filter(product=correct_product) # Ratings of users who rated this product
-    rated_users_list = {rating.reviewer: rating.rating for rating in rated_users}
+    rated_users_list = {rating.reviewer: int(rating.rating) for rating in rated_users}
+    print (rated_users_list)
     current_user_ratings = rated_users.filter(reviewer=request.user).all()
     if "?ratebutton=Give" in current_url:
         current_split_url = current_url.split("?ratebutton=Give+this+product+")
@@ -164,3 +166,9 @@ def category_search(request, categoryname):
 
 def test_profile(request):
     return render(request, 'site360/profileinfo.html', {})
+
+from django.template.defaulttags import register
+
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)

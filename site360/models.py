@@ -46,7 +46,7 @@ class Rating(models.Model):
     product = models.ForeignKey('Product', null=True)
 
     def __int__(self):
-        return self.rating
+        return int(self.rating)
 
     def __str__(self):
         if self.reviewer and self.rating and self.product:
