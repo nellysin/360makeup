@@ -43,12 +43,16 @@ class Review(models.Model):
 class Rating(models.Model):
     rating = models.DecimalField(max_digits=2, decimal_places=1)
     reviewer = models.ForeignKey('auth.User', null=True)
+    product = models.ForeignKey('Product', null=True)
 
     def __int__(self):
         return self.rating
 
     def __str__(self):
-        return str(self.rating)
+        if self.reviewer and self.rating and self.product:
+            return self.reviewer.username + ": " + self.product.name + ", " + str(self.rating)
+        else:
+            return "None"
 
     def publish(self):
         self.save()

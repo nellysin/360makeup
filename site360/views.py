@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
-from .models import Product, Favorite
+from .models import Product, Favorite, Rating
 from .forms import ReviewForm
 
 def url_to_product_name(url):
@@ -14,13 +14,13 @@ def home(request):
     return render(request, 'site360/home.html', {})
 
 def product_detail(request, productname):
+
     all_products = Product.objects.all()
     correct_product = 0
     for product in all_products:
         if product.name_to_url() == productname:
             correct_product = product
             break
-    #correct_product = get_object_or_404(Product, name=formatted_product_name)
 
     if not correct_product:
         raise Http404('Product does not exist')
@@ -28,7 +28,7 @@ def product_detail(request, productname):
     is_product_favorite = False
     if(request.GET.get('favoritebutton')):
         favorite_users = Favorite.objects.filter(product=correct_product)
-        # If the current user has not yet this product:
+        # If the current user has not yet favorited this product:
         if favorite_users.filter(user=request.user).count() == 0:
             is_product_favorite = False
             favorite = Favorite()
@@ -37,6 +37,25 @@ def product_detail(request, productname):
             favorite.save()
         else:
             is_product_favorite = True
+
+    # Calculate and store ratings
+    # *WEEPS* FORGIVE ME
+    current_url = request.get_full_path()
+    if "?favoritebutton=Give" in current_url:
+        current_split_url = current_url.split("?favoritebutton=Give+this+product+")
+        current_rating = current_split_url[1][0]
+        rated_users = Rating.objects.filter(product=correct_product)
+        current_user_ratings = rated_users.filter(reviewer=request.user).all()
+        if current_user_ratings == 0:
+            rating = Rating()
+            rating.product = correct_product
+            rating.reviewer = request.user
+            rating.rating = current_rating
+        else:
+            rating = current_user_ratings[0]
+            rating.rating = current_rating
+        rating.save()
+        return redirect(current_split_url[0])
 
     reviews = correct_product.review_set.all().order_by('-date_posted') #Most recent reviews first
     review_count = reviews.count()
