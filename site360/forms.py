@@ -10,4 +10,4 @@ class ProfilePictureForm(forms.ModelForm):
 	class Meta:
 		model = Profile
 		fields = ('picture_url',)
-		widgets = {'picture_url': forms.TextInput,}
+		#widgets = {'picture_url': forms.TextInput,}

@@ -86,6 +86,8 @@ def product_detail(request, productname):
             review.save()
             reviews = correct_product.review_set.all().order_by('-date_posted') #Most recent reviews first
             review_count = reviews.count()
+            current_url = request.get_full_path()
+            return redirect(current_url)
     else:
         form = ReviewForm()
 
@@ -130,22 +132,22 @@ def profile_info(request, username):
     # TO DO: IF USER TRIES TO GET PROFILE, CREATE NEW PROFILE
     favorites = Favorite.objects.filter(user=user).all()
 
-    #picture_url = profile.picture_url
+    picture_url = user.profile.picture_url
 
-    """
     # THIS DOESN'T WORK
     if request.method == "POST":
         form = ProfilePictureForm(request.POST)
         if form.is_valid():
-            profile.picture_url = form.save(commit=False)
-            picture_url = profile.picture_url
-            profile.user = user
-            profile.save()
+            form_data = form.save(commit=False)
+            picture_url = form_data.picture_url
+            user.profile.picture_url = picture_url
+            user.save()
+            current_url = request.get_full_path()
+            return redirect(current_url)
     else:
         form = ProfilePictureForm()
-    """
 
-    return render(request, 'site360/profileinfo.html', {'username': username, 'favorites': favorites})
+    return render(request, 'site360/profileinfo.html', {'username': username, 'favorites': favorites, 'form': form, 'picture_url': picture_url})
 
 def category_search(request, categoryname):
     products = Product.objects.filter(category = categoryname).order_by('-average_rating')

@@ -10,17 +10,18 @@
 
   </head>
 <style>
-
    #imageUpload
 {
     display: none;
 }
-
 #profileImage
 {
     cursor: pointer;
 }
 
+ body {
+  text-align:center;
+ }
 #profile-container {
     width: 150px;
     height: 150px;
@@ -31,48 +32,32 @@
     -o-border-radius: 50%;
     border-radius: 50%;
  }
-
 #profile-container img {
     width: 150px;
     height: 150px;
 }
-
-.mySlides {
- display:none
- }
-
-.demo {
- cursor:pointer
- }
-
-body{
-text-align:center;
-}
-
-td{
-border:3px solid #ff9999;
-padding:20px;
-}
-
   </style>
   <body>
 
-      <h3>{{ username }}'s Profile</h3>
+      <h2>{{ username }}'s Profile</h2>
 
 
+<!--
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <div id="profile-container">
    <image id="profileImage" src="http://www.gibbahouse.com/wp-content/uploads/2014/12/Funny-Animals-With-Makeup_2.jpg" />
 </div>
 <input id="imageUpload" type="file"
        name="profile_photo" placeholder="Photo" required="" capture>
+-->
+<br>
+<br>
 
-<!--
+<h3>Change profile picture</h3>
+
 <img src="{{ picture_url }}" alt="{{ username }}'s profile picture" id="profile-container">
-
 <br>
 <br>
-
 {% if user.is_authenticated and user.username == username %}
   <form method="POST" class="post-form">{% csrf_token %}
     {{ form.as_p }}
@@ -80,10 +65,11 @@ padding:20px;
   </form>
 {% endif %}
 
--->
+<br>
+<br>
 
  <div class="w3-container">
-  <h2>Favorites</h2>
+  <h3>Favorites</h3>
 
 {% for favorite in favorites %}
   <img src="{{ favorite.product.image_url }}" alt="A picture of {{ favorite.product.name }}" width=10% height=10%>
@@ -92,69 +78,19 @@ padding:20px;
 
 <br>
 
-  <div class="w3-row-padding w3-section">
-    <div class="w3-col s4">
-      <img class="demo w3-opacity w3-hover-opacity-off" src="http://cdn.theeverygirl.com/wp-content/uploads/2015/12/theeverygirl-secrets-from-a-makeup-artist-10-must-haves-at-sephora209.jpg" style="width:30%" onclick="currentDiv(1)">
-    </div>
-    <div class="w3-col s4">
-      <img class="demo w3-opacity w3-hover-opacity-off" src="http://www.sephora.com/productimages/sku/s1258284-main-Lhero.jpg" style="width:30%" onclick="currentDiv(2)">
-    </div>
-    <div class="w3-col s4">
-      <img class="demo w3-opacity w3-hover-opacity-off" src="https://s-media-cache-ak0.pinimg.com/originals/fd/ab/66/fdab66685b33c765ccaa00e2ae7b0a57.jpg" style="width:22% " onclick="currentDiv(3)">
-    </div>
-  </div>
-</div>
-
-<img class="mySlides" src="http://i.imgur.com/ZZgutGX.png" style="width:100%" >
-<img class="mySlides" src="http://i.imgur.com/uILGJRw.png" style="width:100%"></td>
-<img class="mySlides" src="http://i.imgur.com/2X3mulf.png" style="width:100%">
-
-
-
 <script type= "text/javascript">
-
- var slideIndex = 1;
-showDivs(slideIndex);
-
-function plusDivs(n) {
-  showDivs(slideIndex += n);
-}
-
-function currentDiv(n) {
-  showDivs(slideIndex = n);
-}
-
-function showDivs(n) {
-  var i;
-  var x = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("demo");
-  if (n > x.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = x.length}
-  for (i = 0; i < x.length; i++) {
-     x[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-     dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
-  }
-  x[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " w3-opacity-off";
-}
-
          $("#profileImage").click(function(e) {
     $("#imageUpload").click();
 });
-
 function fasterPreview( uploader ) {
     if ( uploader.files && uploader.files[0] ){
           $('#profileImage').attr('src',
              window.URL.createObjectURL(uploader.files[0]) );
     }
 }
-
 $("#imageUpload").change(function(){
     fasterPreview( this );
 });
-
 </script>
  </body>
   {% endblock %}

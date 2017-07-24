@@ -59,18 +59,21 @@ class Rating(models.Model):
 
 class Profile(models.Model):
     # In progress
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     picture_url = models.URLField(null=True)
 
     def __str__(self):
-        return self.user.username
+        return "Profile"
 
-# # Credit to Simpleisbetterthancomplex
-# @receiver(post_save, sender=User)
-# def update_user_profile(sender, instance, created, **kwargs):
-#     if created:
-#         Profile.objects.create(user=instance)
-#     instance.profile.save()
+# Credit to Simpleisbetterthancomplex
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
 
 class Favorite(models.Model):
     user = models.ForeignKey('auth.User', related_name='favorite_user', null=True)
