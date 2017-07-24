@@ -27,17 +27,17 @@ def product_detail(request, productname):
         raise Http404('Product does not exist')
 
     is_product_favorite = False
-    if(request.GET.get('favoritebutton')):
-        favorite_users = Favorite.objects.filter(product=correct_product)
-        # If the current user has not yet favorited this product:
-        if favorite_users.filter(user=request.user).count() == 0:
-            is_product_favorite = False
+    favorite_users = Favorite.objects.filter(product=correct_product)
+    # If the current user has not yet favorited this product:
+    if favorite_users.filter(user=request.user).count() == 0:
+        is_product_favorite = False
+        if(request.GET.get('favoritebutton')):
             favorite = Favorite()
             favorite.product = correct_product
             favorite.user = request.user
             favorite.save()
-        else:
-            is_product_favorite = True
+    else:
+        is_product_favorite = True
 
     # Calculate and store ratings
     # *WEEPS* FORGIVE ME

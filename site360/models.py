@@ -63,7 +63,7 @@ class Profile(models.Model):
     picture_url = models.URLField(null=True)
 
     def __str__(self):
-        return "Profile"
+        return self.user.username
 
 # Credit to Simpleisbetterthancomplex
 @receiver(post_save, sender=User)
