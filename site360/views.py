@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
-from .models import Product
+from .models import Product, Favorite
 from .forms import ReviewForm
 
 def url_to_product_name(url):
@@ -19,10 +19,24 @@ def product_detail(request, productname):
     for product in all_products:
         if product.name_to_url() == productname:
             correct_product = product
+            break
     #correct_product = get_object_or_404(Product, name=formatted_product_name)
 
     if not correct_product:
-        raise Http404("Product does not exist")
+        raise Http404('Product does not exist')
+
+    correctproduct = correct_product
+    if(request.GET.get('favoritebutton')):
+        favorite_users = Favorite.objects.filter(product=correct_product)
+        # If the current user has not yet this product:
+        if favorite_users.filter(user=request.user).count() == 0:
+            is_product_favorite = False
+            favorite = Favorite()
+            favorite.product = correct_product
+            favorite.user = request.user
+            favorite.save()
+        else:
+            is_product_favorite = True
 
     reviews = correct_product.review_set.all().order_by('-date_posted') #Most recent reviews first
     review_count = reviews.count()
@@ -40,7 +54,7 @@ def product_detail(request, productname):
     else:
         form = ReviewForm()
 
-    return render(request, 'site360/product_detail.html', {'product_name': correct_product.name, 'product': correct_product, 'reviews': reviews, 'form': form, 'review_count': review_count})
+    return render(request, 'site360/product_detail.html', {'product_name': correct_product.name, 'product': correct_product, 'reviews': reviews, 'form': form, 'review_count': review_count, 'is_product_favorite': is_product_favorite})
 
 def about_us(request):
     return render(request, 'site360/about_us.html', {})

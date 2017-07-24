@@ -60,7 +60,7 @@ class Profile(models.Model):
 
 class Favorite(models.Model):
     user = models.ForeignKey('auth.User', related_name='favorite_user', null=True)
-    product = models.ForeignKey(Product, related_name='favorite_product', null=True)
+    product = models.ForeignKey('Product', related_name='favorite_product', null=True)
     date_favorited = models.DateTimeField(
             default=timezone.now)
 
