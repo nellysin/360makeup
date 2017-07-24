@@ -221,7 +221,7 @@ width:80%;
 
   <!--show the nav bar-->
   <ul>
-    <li><a href="/"><img src="https://github.com/nellysin/360makeup/blob/master/site360/images/noun_831924_cc.png?raw=true"/>Home</a></li>
+    <li><a href="/">Home</a></li>
       <li><a href="/about-us">About Us</a></li>
       <li class="dropdown">
       <a href="javascript:void(0)" class="dropbtn">Categories▾</a>
@@ -232,7 +232,7 @@ width:80%;
       </div>
     </li>
     {% if user.is_authenticated %}
-      <li><a href="/profile/{{ user.username }}">Profile</a></li>
+      <li><a href="/profile/{{ user.username }}"><img src="https://github.com/nellysin/360makeup/blob/master/site360/images/noun_831924_cc.png?raw=true" style="width:20%; height:20%"/>Profile</a></li>
       <li><a href="/logout">Log Out</a></li>
     {% else %}
       <li><a href="/login">Log In</a></li>
