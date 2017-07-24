@@ -107,16 +107,15 @@ li.dropdown {
 {% if user.is_authenticated %}
   {% if is_product_favorite %}
   <form action="" method="get">
-      <p><input type="submit" value="Remove from favorites" name="removefavoritebutton"></p>
+      <p><input type="button" value="Remove from favorites" name="removefavoritebutton"></p>
     </form>
   {% else %}
     <form action="" method="get">
       <p><input type="submit" value="Add to favorites" name="favoritebutton"></p>
     </form>
   {% endif %}
-{% endif %}
-
 <br>
+{% endif %}
 
 </div>
 <br>

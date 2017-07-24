@@ -85,8 +85,9 @@ def signup(request):
     return render(request, 'site360/signup.html', {'form': form})
 
 def profile_info(request, username):
-    product = get_object_or_404(User, username=username)
-    return render(request, 'site360/profileinfo.html', {'username': username})
+    user = get_object_or_404(User, username=username)
+    favorites = Favorite.objects.filter(user=user)
+    return render(request, 'site360/profileinfo.html', {'username': username, 'favorites': favorites})
 
 def category_search(request, categoryname):
     products = Product.objects.filter(category = categoryname).order_by('-average_rating')

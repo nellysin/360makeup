@@ -3,7 +3,7 @@
  {% block content %}
 <head>
 
-  <title> Your Profile </title>
+  <title>{{ username }}'s Profile</title>
 <!--stylesheet-->
  <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -57,7 +57,8 @@ padding:20px;
   </style>
   <body>
    
-      <h3>Your Profile</h3>
+      <h3>{{ username }}'s Profile</h3>
+      
    
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <div id="profile-container">
@@ -68,6 +69,13 @@ padding:20px;
    
  <div class="w3-container">
   <h2>Favorites</h2>
+
+{% for favorite in favorites %}
+  <img src="{{ favorite.product.image_url }}" alt="A picture of {{ favorite.product.name }}" width=10% height=10%>
+  <p><a href="/product/{{ favorite.product.name_to_url }}">{{ favorite.product.name }}</a></p>
+{% endfor %}
+
+<br>
 
   <div class="w3-row-padding w3-section">
     <div class="w3-col s4">
@@ -85,7 +93,9 @@ padding:20px;
 <img class="mySlides" src="http://i.imgur.com/ZZgutGX.png" style="width:100%" >
 <img class="mySlides" src="http://i.imgur.com/uILGJRw.png" style="width:100%"></td>
 <img class="mySlides" src="http://i.imgur.com/2X3mulf.png" style="width:100%">
-                                                                                                                                            
+
+
+
 <script type= "text/javascript">
 
  var slideIndex = 1;
