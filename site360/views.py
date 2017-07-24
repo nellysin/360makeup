@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
-from .models import Product, Favorite, Rating
-from .forms import ReviewForm
+from .models import Product, Favorite, Rating, Profile
+from .forms import ReviewForm, ProfilePictureForm
 import decimal
 
 def url_to_product_name(url):
@@ -121,8 +121,22 @@ def signup(request):
 
 def profile_info(request, username):
     user = get_object_or_404(User, username=username)
-    favorites = Favorite.objects.filter(user=user)
-    return render(request, 'site360/profileinfo.html', {'username': username, 'favorites': favorites})
+    profile = Profile.objects.filter(user=user)[0]
+    favorites = Favorite.objects.filter(user=user).all()
+
+    picture_url = profile.picture_url
+
+    # THIS DOESN'T WORK
+    if request.method == "POST":
+        form = ProfilePictureForm(request.POST)
+        if form.is_valid():
+            profile.picture_url = form.save(commit=False)
+            picture_url = profile.picture_url
+            profile.save()
+    else:
+        form = ProfilePictureForm()
+
+    return render(request, 'site360/profileinfo.html', {'username': username, 'favorites': favorites, 'picture_url': picture_url, 'form': form})
 
 def category_search(request, categoryname):
     products = Product.objects.filter(category = categoryname).order_by('-average_rating')

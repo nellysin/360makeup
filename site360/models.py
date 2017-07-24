@@ -62,6 +62,16 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     picture_url = models.URLField(null=True)
 
+    def __str__(self):
+        return self.user.username
+
+# Credit to Simpleisbetterthancomplex
+@receiver(post_save, sender=User)
+def update_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+    instance.profile.save()
+
 class Favorite(models.Model):
     user = models.ForeignKey('auth.User', related_name='favorite_user', null=True)
     product = models.ForeignKey('Product', related_name='favorite_product', null=True)
