@@ -97,10 +97,14 @@ li.dropdown {
 
 <br>
 
-<p> Price: ${{ product.price }} </p>
-<p> Average Number of Stars (out of 5): {{ product.average_rating }} (based on {{ product.number_of_ratings }} ratings)</p>
-<p> Description: {{ product.description|linebreaksbr }}</p>
-<p> Where to buy online: Nowhere yet!</p>
+<p><b>Price:</b> ${{ product.price }} </p>
+{% if product.number_of_ratings == 1 %}
+  <p><b>Average Number of Stars (out of 5):</b> {{ product.average_rating }} (based on 1 rating)</p>
+{% else %}
+  <p><b>Average Number of Stars (out of 5):</b> {{ product.average_rating }} (based on {{ product.number_of_ratings }} ratings)</p>
+{% endif %}
+<p><b>Description:</b> {{ product.description|linebreaksbr }}</p>
+<p><b>Where to buy online:</b> Nowhere yet!</p>
 
 <br>
 {% if user.is_authenticated %}
@@ -111,7 +115,7 @@ li.dropdown {
     <img src="http://imgur.com/FdlPxEa.png" class="star" onclick=darkenStars(3) width=32px height=32px>
     <img src="http://imgur.com/FdlPxEa.png" class="star" onclick=darkenStars(4) width=32px height=32px>
     <img src="http://imgur.com/FdlPxEa.png" class="star" onclick=darkenStars(5) width=32px height=32px>
-    <p><input type="submit" value="Rate product" id="favoritebutton" name="favoritebutton"></p>
+    <p><input type="submit" value="Give this product 5 stars" id="favoritebutton" name="favoritebutton"></p>
   </form>
 
   <script>
@@ -124,7 +128,11 @@ li.dropdown {
       for (i=number_of_stars; i<5; i++) {
         document.getElementsByClassName("star")[i].setAttribute("src", "http://imgur.com/x.png");
       }
-      var new_button_value = "Give this product ".concat(darkened_stars, " stars");
+      if (darkened_stars == 1) {
+        var new_button_value = "Give this product 1 star";
+      } else {
+        var new_button_value = "Give this product ".concat(darkened_stars, " stars");
+      }
       document.getElementById("favoritebutton").setAttribute("value", new_button_value);
     }
   </script>

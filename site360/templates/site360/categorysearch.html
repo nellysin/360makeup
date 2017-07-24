@@ -24,7 +24,11 @@ img.preview
        <a STYLE="text-decoration:none" href="/product/{{ product.name_to_url }}"><h2 style = "color:black">{{ product.name }}</h2></a>
       <img src="{{ product.image_url }}" alt="A picture of {{ product.name }}" width=10% height=10%/>
       <p><i><b>{{ product.company }}</b></i></p>
-      <p><b>Average stars:</b> {{ product.average_rating }} (based on {{ product.number_of_ratings }} ratings)</p>
+      {% if product.number_of_ratings == 1 %}
+        <p><b>Average Number of Stars (out of 5):</b> {{ product.average_rating }} (based on 1 rating)</p>
+      {% else %}
+        <p><b>Average Number of Stars (out of 5):</b> {{ product.average_rating }} (based on {{ product.number_of_ratings }} ratings)</p>
+      {% endif %}
       <p><b>Price:</b> ${{ product.price }} </p>
       <p><a href="/product/{{ product.name_to_url }}">Read more ></a></p>
       <br/>
