@@ -11,7 +11,7 @@
 <div id="wrapper">
 
 <div class="form_div">
-<p class="form_label">LOG IN</p>
+<p class="form_label" style= "font-family:Lobster Two, cursive;">LOG IN</p>
 <!--
 <form method="post" action="">
 <p><input type="text" placeholder="Enter Email"></p>
@@ -23,7 +23,18 @@
 <form method="post">
   {% csrf_token %}
   {{ form.as_p }}
-  <p><input type="submit" value="LOGIN"></p>
+    <p><input type="submit" style="background-color: #FF47A3
+    ; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-family: 'Lobster Two', cursive;
+    margin: 4px 2px;
+    cursor: pointer;" value="LOGIN"></p>
 </form>
 </div>
 <br>
