@@ -39,7 +39,7 @@
   </style>
   <body>
 
-      <h2>{{ username }}'s Profile</h2>
+      <h2 style="font-family: Lobster Two;">{{ username }}'s Profile</h2>
 
 
 <!--
@@ -53,7 +53,7 @@
 <br>
 <br>
 
-<h3>Change profile picture</h3>
+<h2 style="font-family: Lobster Two;">Change profile picture</h2>
 
 <img src="{{ picture_url }}" alt="{{ username }}'s profile picture" id="profile-container">
 <br>
@@ -61,7 +61,18 @@
 {% if user.is_authenticated and user.username == username %}
   <form method="POST" class="post-form">{% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" style="font-family:Lobster Two; color:#FF69B4;" class="save btn btn-default">Save</button>
+    <button type="submit" style="background-color: #FF47A3
+    ; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-family: 'Lobster Two', cursive;
+    margin: 4px 2px;
+    cursor: pointer;" class="save btn btn-default">Save</button>
   </form>
 {% endif %}
 
