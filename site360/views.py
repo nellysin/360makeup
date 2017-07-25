@@ -50,42 +50,47 @@ def product_detail(request, productname):
 
     # Calculate and store ratings
     # *WEEPS* FORGIVE ME
-    current_url = request.get_full_path()
-    rated_users = Rating.objects.filter(product=correct_product) # Ratings of users who rated this product
-    rated_users_list = {rating.reviewer: int(rating.rating) for rating in rated_users}
-    current_user_ratings = rated_users.filter(reviewer=request.user).all()
-    if "?ratebutton=Give" in current_url:
-        current_split_url = current_url.split("?ratebutton=Give+this+product+")
-        current_rating = current_split_url[1][0]
-        if current_user_ratings.count() == 0: # User has rated product for the first time
-            rating = Rating()
-            rating.product = correct_product
-            rating.reviewer = request.user
-            rating.rating = current_rating
-            correct_product.number_of_ratings += 1
+    if request.user.is_authenticated:
+        current_url = request.get_full_path()
+        rated_users = Rating.objects.filter(product=correct_product) # Ratings of users who rated this product
+        rated_users_list = {rating.reviewer: int(rating.rating) for rating in rated_users}
+        current_user_ratings = rated_users.filter(reviewer=request.user).all()
+        if "?ratebutton=Give" in current_url:
+            current_split_url = current_url.split("?ratebutton=Give+this+product+")
+            current_rating = current_split_url[1][0]
+            if current_user_ratings.count() == 0: # User has rated product for the first time
+                rating = Rating()
+                rating.product = correct_product
+                rating.reviewer = request.user
+                rating.rating = current_rating
+                correct_product.number_of_ratings += 1
+                correct_product.save()
+            else:
+                rating = current_user_ratings[0]
+                rating.rating = current_rating
+
+            rating.save()
+
+            #average_rating = models.FloatField()
+            #number_of_ratings = models.IntegerField()
+
+            rating_sum = 0
+            # Recalculate product rating
+            for product_rating in rated_users:
+                rating_sum += product_rating.rating
+            average_rating = rating_sum/correct_product.number_of_ratings
+            correct_product.average_rating = round(decimal.Decimal(average_rating), 1)
             correct_product.save()
+
+            return redirect(current_split_url[0])
+
+        if current_user_ratings.count():
+            current_user_rating = int(current_user_ratings[0].rating)
         else:
-            rating = current_user_ratings[0]
-            rating.rating = current_rating
-
-        rating.save()
-
-        #average_rating = models.FloatField()
-        #number_of_ratings = models.IntegerField()
-
-        rating_sum = 0
-        # Recalculate product rating
-        for product_rating in rated_users:
-            rating_sum += product_rating.rating
-        average_rating = rating_sum/correct_product.number_of_ratings
-        correct_product.average_rating = round(decimal.Decimal(average_rating), 1)
-        correct_product.save()
-
-        return redirect(current_split_url[0])
-
-    if current_user_ratings.count():
-        current_user_rating = int(current_user_ratings[0].rating)
+            current_user_rating = 0
+            rated_users_list = []
     else:
+        rated_users_list = []
         current_user_rating = 0
 
     reviews = correct_product.review_set.all().order_by('-date_posted') #Most recent reviews first
