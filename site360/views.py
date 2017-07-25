@@ -164,10 +164,8 @@ def category_search(request, categoryname):
     products = Product.objects.filter(category = categoryname).order_by('-average_rating')
     return render(request, 'site360/categorysearch.html', {'category':categoryname, 'products': products})
 
-def test_profile(request):
-    return render(request, 'site360/profileinfo.html', {})
-
-from django.template.defaulttags import register
+def tutorials(request):
+    return render(request, 'site360/tutorials.html', {})
 
 @register.filter
 def get_item(dictionary, key):

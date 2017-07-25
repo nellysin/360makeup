@@ -22,6 +22,6 @@ urlpatterns = [
     # Search-related pages
     url(r'^category/(?P<categoryname>([A-Z]|[a-z])*)/$', views.category_search, name='category_search'),
 
-    # Delete later
-    url(r'testprofile/$', views.test_profile, name="test_profile")
+    url(r'^tutorials/$', views.tutorials, name='tutorials'),
+
 ]

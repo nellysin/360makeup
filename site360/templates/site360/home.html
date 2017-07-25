@@ -14,7 +14,7 @@
   <h2>FEATURED:</h2>
 
 
-     
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 * {box-sizing:border-box}
@@ -65,18 +65,18 @@ body {font-family: Verdana,sans-serif;}
   animation-duration: 1.5s;
 }
 @-webkit-keyframes fade {
-  from {opacity: .4} 
+  from {opacity: .4}
   to {opacity: 1}
 }
 @keyframes fade {
-  from {opacity: .4} 
+  from {opacity: .4}
   to {opacity: 1}
 }
 /* On smaller screens, decrease text size */
 @media only screen and (max-width: 300px) {
   .text {font-size: 11px}
 }
-  
+
 </style>
 </head>
 <body>
@@ -97,7 +97,7 @@ body {font-family: Verdana,sans-serif;}
 
 <div class="mySlides fade">
   <div class="numbertext">3 / 4</div>
-  <img src="http://i.imgur.com/suGAqzR.jpg"/></a> 
+  <img src="http://i.imgur.com/suGAqzR.jpg"/></a>
   <div class="text"></div>
 </div>
 
@@ -110,10 +110,10 @@ body {font-family: Verdana,sans-serif;}
 <br>
 
 <div style="text-align:center">
-  <span class="dot"></span> 
-  <span class="dot"></span> 
   <span class="dot"></span>
-  <span class="dot"></span> 
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
 </div>
 
 <script>
@@ -124,14 +124,14 @@ function showSlides() {
     var slides = document.getElementsByClassName("mySlides");
     var dots = document.getElementsByClassName("dot");
     for (i = 0; i < slides.length; i++) {
-       slides[i].style.display = "none";  
+       slides[i].style.display = "none";
     }
     slideIndex++;
-    if (slideIndex> slides.length) {slideIndex = 1}    
+    if (slideIndex> slides.length) {slideIndex = 1}
     for (i = 0; i < dots.length; i++) {
         dots[i].className = dots[i].className.replace(" active", "");
     }
-    slides[slideIndex-1].style.display = "block";  
+    slides[slideIndex-1].style.display = "block";
     dots[slideIndex-1].className += " active";
     setTimeout(showSlides, 3000); // Change image every 2 seconds
 }
@@ -139,14 +139,6 @@ function showSlides() {
 </center>
 </body>
 <body>
- <h1><img src="https://d30y9cdsu7xlg0.cloudfront.net/png/985007-200.png" alt="Mountain View" style="width:23px;height:50px;">Tutorials For Makeup</h1>
-
-<iframe width="560" height="315" style="text-align:right;" src="https://www.youtube.com/embed/bwuVuDzH3hY" frameborder="0" allowfullscreen></iframe>
-<iframe width="560" height="315" float="right" src="https://www.youtube.com/embed/BuPZjBlmyD4" frameborder="0" allowfullscreen></iframe>
-<iframe width="560" height="315"  src="https://www.youtube.com/embed/95JXjGnBFGQ" frameborder="0" allowfullscreen></iframe>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/KfQ0Ln7uX-I" frameborder="0" allowfullscreen></iframe>
-
-  
 {% endblock %}
 
 </body>
