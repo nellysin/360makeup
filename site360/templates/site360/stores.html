@@ -3,5 +3,47 @@
 {% block content %}
 <!--Code goes here!-->
 
+<div id="map" style="width:100%;height:500px"></div>
+
+<script>
+function myMap() {
+  var myCenter = new google.maps.LatLng(37.773972,-122.431297);
+  var mapCanvas = document.getElementById("map");
+  var mapOptions = {center: myCenter, zoom:13 };
+  var map = new google.maps.Map(mapCanvas, mapOptions);
+  
+  /*coordinates*/
+  var sephora1 = new google.maps.LatLng(37.7948, -122.3984);
+  var cvs1 = new google.maps.LatLng(37.7917, -122.4226);
+  var green1 = new google.maps.LatLng(37.765633,-122.419433);
+  var sephora2 = new google.maps.LatLng(37.797141,-122.43354);
+  var green2 = new google.maps.LatLng(37.768668,-122.435427);
+  var green3 = new google.maps.LatLng(37.777109,-122.395241);
+  var sephora3 = new google.maps.LatLng(37.784885,-122.408149);
+  
+  /*markers*/
+  var marker = new google.maps.Marker({position:sephora1});
+  marker.setMap(map);
+  var marker = new google.maps.Marker({position:cvs1});
+  marker.setMap(map);
+  var marker = new google.maps.Marker({position:green1});
+  marker.setMap(map);
+  var marker = new google.maps.Marker({position:sephora2});
+  marker.setMap(map);
+  var marker = new google.maps.Marker({position:green2});
+  marker.setMap(map);
+  var marker = new google.maps.Marker({position:green3});
+  marker.setMap(map);
+  var marker = new google.maps.Marker({position:sephora3});
+  marker.setMap(map);
+  var marker = new google.maps.Marker({position:green3});
+  marker.setMap(map);
+  
+  
+}
+</script>
+
+<!--library for the google maps-->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=myMap"></script>
 
 {% endblock %}
