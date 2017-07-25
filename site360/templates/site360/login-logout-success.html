@@ -22,9 +22,9 @@
     You have logged out successfully.
   {% endif %}
 </p>
-<p style = "color:white"><a href='/'>Return to home</a></p>
+<p><a style = "color:white" href='/'>Return to home</a></p>
 {% if user.is_authenticated %}
-  <p style =><a href='/profile/{{ user.username }}/'>View profile</a></p>
+  <p ><a style = "color:white" href='/profile/{{ user.username }}/'>View profile</a></p>
 {% else %}
   <p><a style = "color:white" href='/login/'>Log in</a></p>
 {% endif %}
