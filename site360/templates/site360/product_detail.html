@@ -168,12 +168,16 @@ li.dropdown {
     padding: 0px;
     margin: 0px;">
 <h2>Dupes</h2> </div>
-{% for dupe in dupes %}
-  <h3>{{ dupe.name }}</h3>
-  <p>{{ dupe.company }}</p>
-  <p>${{ dupe.price }}</p>
-  <p><a href="{{ dupe.url }}">More information ></a></p><br/>
-{% endfor %}
+{% if dupes.count %}
+  {% for dupe in dupes %}
+    <h3>{{ dupe.name }}</h3>
+    <p>{{ dupe.company }}</p>
+    <p>${{ dupe.price }}</p>
+    <p><a href="{{ dupe.url }}">More information ></a></p><br/>
+  {% endfor %}
+{% else %}
+  <p>No dupes for this product yet!</p>
+{% endif %}
 
 <br/>
 <div style = "background-color: #FFC2E0;
