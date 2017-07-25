@@ -108,7 +108,10 @@ li.dropdown {
 
 <br>
 {% if user.is_authenticated %}
-  <p>Click the stars below to rate the product.</p>
+  {% if user in rated_users_list.keys %}
+    <p>You gave this product {{ current_user_rating }} stars.</p>
+  {% endif %}
+  <p>Click the stars below to {% if user in rated_users_list.keys %}change your rating{% else %}rate this product{% endif %}.</p>
   <form action="" method="get">
     <img src="http://imgur.com/FdlPxEa.png" class="star" onclick=darkenStars(1) width=32px height=32px>
     <img src="http://imgur.com/FdlPxEa.png" class="star" onclick=darkenStars(2) width=32px height=32px>

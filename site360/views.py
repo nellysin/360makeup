@@ -53,7 +53,6 @@ def product_detail(request, productname):
     current_url = request.get_full_path()
     rated_users = Rating.objects.filter(product=correct_product) # Ratings of users who rated this product
     rated_users_list = {rating.reviewer: int(rating.rating) for rating in rated_users}
-    print (rated_users_list)
     current_user_ratings = rated_users.filter(reviewer=request.user).all()
     if "?ratebutton=Give" in current_url:
         current_split_url = current_url.split("?ratebutton=Give+this+product+")
@@ -84,6 +83,11 @@ def product_detail(request, productname):
 
         return redirect(current_split_url[0])
 
+    if current_user_ratings.count():
+        current_user_rating = int(current_user_ratings[0].rating)
+    else:
+        current_user_rating = 0
+
     reviews = correct_product.review_set.all().order_by('-date_posted') #Most recent reviews first
     review_count = reviews.count()
 
@@ -102,7 +106,7 @@ def product_detail(request, productname):
     else:
         form = ReviewForm()
 
-    return render(request, 'site360/product_detail.html', {'product_name': correct_product.name, 'product': correct_product, 'reviews': reviews, 'form': form, 'review_count': review_count, 'is_product_favorite': is_product_favorite, 'rated_users_list': rated_users_list})
+    return render(request, 'site360/product_detail.html', {'product_name': correct_product.name, 'product': correct_product, 'reviews': reviews, 'form': form, 'review_count': review_count, 'is_product_favorite': is_product_favorite, 'rated_users_list': rated_users_list, 'current_user_rating': current_user_rating},)
 
 def about_us(request):
     return render(request, 'site360/about_us.html', {})
@@ -145,7 +149,6 @@ def profile_info(request, username):
 
     picture_url = user.profile.picture_url
 
-    # THIS DOESN'T WORK
     if request.method == "POST":
         form = ProfilePictureForm(request.POST)
         if form.is_valid():
