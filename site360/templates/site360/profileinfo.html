@@ -37,6 +37,7 @@
     height: 150px;
 }
   </style>
+
   <body>
 
       <h2 style="font-family: Lobster Two;">{{ username }}'s Profile</h2>
@@ -51,18 +52,20 @@
        name="profile_photo" placeholder="Photo" required="" capture>
 -->
 <br>
-<br>
 
-<h2 style="font-family: Lobster Two;">Change profile picture</h2>
+{% if user.is_authenticated and user.username == username %}
+  <br>
+  <h2 style="font-family: Lobster Two;">Change profile picture</h2>
+  <br>
+{% endif %}
 
 <img src="{{ picture_url }}" alt="{{ username }}'s profile picture" id="profile-container">
-<br>
 <br>
 {% if user.is_authenticated and user.username == username %}
   <form method="POST" class="post-form">{% csrf_token %}
     {{ form.as_p }}
     <button type="submit" style="background-color: #FF47A3
-    ; 
+    ;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -82,27 +85,20 @@
  <div class="w3-container">
   <h3  style="font-family:Lobster Two;color:#ff4d88;">Favorites</h3>
 
-{% for favorite in favorites %}
-  <img src="{{ favorite.product.image_url }}" alt="A picture of {{ favorite.product.name }}" width=10% height=10%>
-  <p><a href="/product/{{ favorite.product.name_to_url }}">{{ favorite.product.name }}</a></p>
-{% endfor %}
+{% if favorites.count %}
+  {% for favorite in favorites %}
+    <img src="{{ favorite.product.image_url }}" alt="A picture of {{ favorite.product.name }}" width=10% height=10%>
+    <p><a href="/product/{{ favorite.product.name_to_url }}">{{ favorite.product.name }}</a></p>
+  {% endfor %}
+{% else %}
+  {% if user.is_authenticated and user.username == username %}
+    <p>You don't have any favorites yet.</p>
+  {% else %}
+    <p>{{ username }} doesn't have any favorites yet.</p>
+  {% endif %}
+{% endif %}
 
 <br>
-
-<script type= "text/javascript">
-         $("#profileImage").click(function(e) {
-    $("#imageUpload").click();
-});
-function fasterPreview( uploader ) {
-    if ( uploader.files && uploader.files[0] ){
-          $('#profileImage').attr('src',
-             window.URL.createObjectURL(uploader.files[0]) );
-    }
-}
-$("#imageUpload").change(function(){
-    fasterPreview( this );
-});
-</script>
  </body>
   {% endblock %}
 </html>
