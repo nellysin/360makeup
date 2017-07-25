@@ -19,15 +19,6 @@ html, body {
 
 p{
 font-family: "century gothic"
-background-color: #FF47A3; 
-    border: none;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    font-family: 'Lobster Two', cursive;
-    margin: 4px 2px;"
 }
 
 h1{
@@ -126,7 +117,14 @@ li.dropdown {
     <img src="http://imgur.com/FdlPxEa.png" class="star" onclick=darkenStars(3) width=32px height=32px>
     <img src="http://imgur.com/FdlPxEa.png" class="star" onclick=darkenStars(4) width=32px height=32px>
     <img src="http://imgur.com/FdlPxEa.png" class="star" onclick=darkenStars(5) width=32px height=32px>
-    <p><input type="submit" value="Give this product 5 stars" id="ratebutton" name="ratebutton"></p>
+    <p><input type="submit" style="background-color: #FF47A3; 
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px; color:white" value="Give this product 5 stars" id="ratebutton" name="ratebutton"></p>
   </form>
 
   <script>
@@ -161,7 +159,14 @@ li.dropdown {
     </form>
   {% else %}
     <form action="" method="get">
-      <p><input type="submit" value="Add to favorites" name="favoritebutton"></p>
+      <p><input type="submit" style="background-color: #FF47A3; 
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px; color:white;" value="Add to favorites" name="favoritebutton"></p>
     </form>
   {% endif %}
 <br>
@@ -252,18 +257,14 @@ li.dropdown {
     {% if user.is_authenticated %}
       <form method="POST" class="post-form">{% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" style="background-color: #FF47A3
-    ; 
+        <button type="submit" class="save btn btn-default" style="background-color: #FF47A3; 
     border: none;
-    color: white;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    font-family: 'Lobster Two', cursive;
-    margin: 4px 2px;
-    cursor: pointer;" class="save btn btn-default">Publish</button>
+    margin: 4px 2px; color:white">Publish</button>
       </form>
     {% else %}
       <p><a href='/login'>Log in</a> to write a review!</p>
