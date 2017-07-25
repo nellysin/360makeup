@@ -1,4 +1,5 @@
 {% extends 'site360/base.html' %}
+{% block content %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -83,11 +84,25 @@ li.dropdown {
     display: block;
 }
 
+#profile-container {
+    width: 32px;
+    height: 32px;
+    overflow: hidden;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+ }
+#profile-container img {
+    width: 32px;
+    height: 32px;
+}
+
 </style>
 </head>
 <body>
 
-{% block content %}
 <br>
 <header>
     <h1>Category: {{ product.category.capitalize }}</h1>
@@ -117,7 +132,7 @@ li.dropdown {
     <img src="http://imgur.com/FdlPxEa.png" class="star" onclick=darkenStars(3) width=32px height=32px>
     <img src="http://imgur.com/FdlPxEa.png" class="star" onclick=darkenStars(4) width=32px height=32px>
     <img src="http://imgur.com/FdlPxEa.png" class="star" onclick=darkenStars(5) width=32px height=32px>
-    <p><input type="submit" style="background-color: #FF47A3; 
+    <p><input type="submit" style="background-color: #FF47A3;
     border: none;
     padding: 15px 32px;
     text-align: center;
@@ -159,7 +174,7 @@ li.dropdown {
     </form>
   {% else %}
     <form action="" method="get">
-      <p><input type="submit" style="background-color: #FF47A3; 
+      <p><input type="submit" style="background-color: #FF47A3;
     border: none;
     padding: 15px 32px;
     text-align: center;
@@ -225,7 +240,7 @@ li.dropdown {
   {% for review in reviews %}
     <p>
       <a href="/profile/{{ review.author }}">
-        <img src="{{ review.author.profile.picture_url }}" width=32px height=32px/>
+        <img src="{{ review.author.profile.picture_url }}" width=32px height=32px id="profile-container">
         {{ review.author }}
       </a> says:
     </p>
@@ -235,6 +250,7 @@ li.dropdown {
       <p>This user hasn't rated the product yet.</p>
     {% endif %}
     <p class="groove">{{ review.body|linebreaksbr }}</p>
+    <p>{{ review.date_posted }}</p>
 
     <br/>
   {% endfor %}
@@ -257,7 +273,7 @@ li.dropdown {
     {% if user.is_authenticated %}
       <form method="POST" class="post-form">{% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="save btn btn-default" style="background-color: #FF47A3; 
+        <button type="submit" class="save btn btn-default" style="background-color: #FF47A3;
     border: none;
     padding: 15px 32px;
     text-align: center;
@@ -268,7 +284,7 @@ li.dropdown {
       </form>
     {% else %}
       <p style="background-color: #FF47A3
-    ; 
+    ;
     border: none;
     color: white;
     padding: 15px 32px;
