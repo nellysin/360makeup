@@ -3,9 +3,11 @@
 {% block content %}
 <p>
   {% if did_user_just_register %}
-    You have registered successfully. Welcome to 360° Makeup, {{ user.username }}!
+    You have successfully registered. Welcome to 360° Makeup, {{ user.username }}!
+  {% elif user.is_authenticated %}
+    Welcome back, {{ user.username }}!
   {% else %}
-    You have {% if user.is_authenticated %}logged in{% else %}logged out{% endif %} successfully!
+    You have logged out successfully.
   {% endif %}
 </p>
 <p><a href='/'>Return to home</a></p>
