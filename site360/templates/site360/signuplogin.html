@@ -11,53 +11,32 @@
 <div id="wrapper">
 
 <div class="form_div">
-<p class="form_label" style= "font-family:Lobster Two, cursive;">Log in</p>
-<!--
-<form method="post" action="">
-<p><input type="text" placeholder="Enter Email"></p>
-<p><input type="password" placeholder="**********"></p>
-<p><input type="submit" value="LOGIN"></p>
-</form>
-<br/>
--->
+  <h2>Log in</h2>
 <form method="post">
   {% csrf_token %}
   {{ form.as_p }}
-    <p><input type="submit" style="background-color: #FF47A3
-    ; 
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    font-family: 'Lobster Two', cursive;
-    margin: 4px 2px;
-    cursor: pointer;" value="Log in"></p>
+  <button type="submit" style="background-color: #FF47A3
+  ;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-family: 'Lobster Two', cursive;
+  margin: 4px 2px;
+  cursor: pointer;">Log in</button>
 </form>
 </div>
 <br>
 
 <br>
 <br>
-
-<!--
-<div class="form_div">
-<p class="form_label">SIGN UP</p>
-<form method="post" action="">
-<p><input type="text" placeholder="Enter Name"></p>
-<p><input type="text" placeholder="Enter Email"></p>
-<p><input type="password" placeholder="**********"></p>
-<p><input type="submit" value="SIGNUP"></p>
-</form>
-</div>
--->
 
 </div>
 </body>
 <style>
-
 </style>
 {% endblock %}
 </html>
