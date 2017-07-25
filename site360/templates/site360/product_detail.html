@@ -167,7 +167,7 @@ li.dropdown {
     padding: 0px;
     margin: 0px;">
 <h2>Where to Buy Online</h2></div>
-{% if buy_online|length > 1 %}
+{% if buy_online %}
   {% for site in buy_online %}
     <p><a href="{{ site.0 }}">{{ site.1 }}</a></p>
   {% endfor %}

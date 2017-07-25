@@ -32,8 +32,10 @@ class Product(models.Model):
 
     def buy_online_to_list(self):
         # Credit to StackOverflow
-        buy_online = self.buy_online.split("\n")
-        return [buy_online[i:i + 2] for i in range(0, len(buy_online), 2)]
+        if "\n" in self.buy_online:
+            buy_online = self.buy_online.split("\n")
+            return [buy_online[i:i + 2] for i in range(0, len(buy_online), 2)]
+        return False
 
 class Review(models.Model):
     date_posted = models.DateTimeField(

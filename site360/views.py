@@ -56,8 +56,20 @@ def product_detail(request, productname):
     rated_users = Rating.objects.filter(product=correct_product) # Ratings of users who rated this product
     ratings_count = rated_users.count()
     rated_users_list = {rating.reviewer: int(rating.rating) for rating in rated_users}
+
     correct_product.number_of_ratings = ratings_count
+    if correct_product.number_of_ratings:
+        # Recalculate product rating
+        rating_sum = 0
+        for product_rating in rated_users:
+            rating_sum += int(product_rating.rating)
+        print (rating_sum)
+        average_rating = float(rating_sum)/float(correct_product.number_of_ratings)
+        correct_product.average_rating = round(decimal.Decimal(average_rating), 1)
+    else:
+        correct_product.average_rating = 0
     correct_product.save()
+
     if request.user.is_authenticated:
         current_url = request.get_full_path()
         current_user_ratings = rated_users.filter(reviewer=request.user).all()
