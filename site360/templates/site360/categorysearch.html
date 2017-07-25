@@ -30,7 +30,15 @@ img.preview
         <p><b>Average Number of Stars (out of 5):</b> {{ product.average_rating }} (based on {{ product.number_of_ratings }} ratings)</p>
       {% endif %}
       <p><b>Price:</b> ${{ product.price }} </p>
-      <p><a href="/product/{{ product.name_to_url }}">Read more ></a></p>
+       <p style="background-color: #FF47A3; 
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-family: 'Lobster Two', cursive;
+    margin: 4px 2px;"><a style = "color: white" href="/product/{{ product.name_to_url }}">Read more ></a></p>
       <br/>
     {% endfor %}
 {% endblock %}
