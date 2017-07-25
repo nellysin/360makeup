@@ -5,7 +5,7 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.defaulttags import register
 from django.utils import timezone
-from .models import Product, Favorite, Rating, Profile
+from .models import Product, Favorite, Rating, Profile, Dupe
 from .forms import ReviewForm, ProfilePictureForm
 import decimal
 
@@ -17,6 +17,7 @@ def home(request):
 
 def product_detail(request, productname):
 
+    # Get product object requested by url
     all_products = Product.objects.all()
     correct_product = 0
     for product in all_products:
@@ -24,9 +25,11 @@ def product_detail(request, productname):
             correct_product = product
             break
 
+    # Raise error if the product requested doesn't exist
     if not correct_product:
         raise Http404('Product does not exist')
 
+    # Handle user marking product as their favorite
     is_product_favorite = False
     favorite_users = Favorite.objects.filter(product=correct_product)
     # If the current user has not yet favorited this product:
@@ -71,9 +74,6 @@ def product_detail(request, productname):
 
             rating.save()
 
-            #average_rating = models.FloatField()
-            #number_of_ratings = models.IntegerField()
-
             rating_sum = 0
             # Recalculate product rating
             for product_rating in rated_users:
@@ -93,9 +93,14 @@ def product_detail(request, productname):
         rated_users_list = []
         current_user_rating = 0
 
+    # Get dupes
+    dupes = correct_product.dupe_set.all().order_by('name')
+
+    # Get all reviews and the total number of reviews
     reviews = correct_product.review_set.all().order_by('-date_posted') #Most recent reviews first
     review_count = reviews.count()
 
+    # Handle user posting review
     if request.method == "POST":
         form = ReviewForm(request.POST)
         if form.is_valid():
@@ -111,7 +116,8 @@ def product_detail(request, productname):
     else:
         form = ReviewForm()
 
-    return render(request, 'site360/product_detail.html', {'product_name': correct_product.name, 'product': correct_product, 'reviews': reviews, 'form': form, 'review_count': review_count, 'is_product_favorite': is_product_favorite, 'rated_users_list': rated_users_list, 'current_user_rating': current_user_rating},)
+    # Render page if nothing has gone wrong along the way
+    return render(request, 'site360/product_detail.html', {'product_name': correct_product.name, 'product': correct_product, 'reviews': reviews, 'form': form, 'review_count': review_count, 'is_product_favorite': is_product_favorite, 'rated_users_list': rated_users_list, 'current_user_rating': current_user_rating, 'dupes': dupes,})
 
 def about_us(request):
     return render(request, 'site360/about_us.html', {})

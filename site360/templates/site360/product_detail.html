@@ -167,6 +167,20 @@ li.dropdown {
     border:1px ;
     padding: 0px;
     margin: 0px;">
+<h2>Dupes</h2> </div>
+{% for dupe in dupes %}
+  <h3>{{ dupe.name }}</h3>
+  <p>{{ dupe.company }}</p>
+  <p>${{ dupe.price }}</p>
+  <p><a href="{{ dupe.url }}">More information ></a></p><br/>
+{% endfor %}
+
+<br/>
+<div style = "background-color: #FFC2E0;
+    width: 664px;
+    border:1px ;
+    padding: 0px;
+    margin: 0px;">
 <h2>Reviews</h2> </div>
 <div style = "background-color: white;
     width: 664px;
