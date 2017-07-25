@@ -18,7 +18,7 @@ urlpatterns = [
     url(r'^login/$', auth_views.login, {'template_name': 'site360/signuplogin.html'}, name='signup_login'),
     url(r'^logout/$', auth_views.logout, {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
     url(r'^success/$', views.auth_success, name='auth_success'),
-    url(r'^profile/(?P<username>(\w|-|_)+)/$', views.profile_info, name='profile_info'),
+    url(r'^profile/(?P<username>(\w|-|_|@|\+)+)/$', views.profile_info, name='profile_info'),
 
     # Search-related pages
     url(r'^category/(?P<categoryname>([A-Z]|[a-z])*)/$', views.category_search, name='category_search'),
