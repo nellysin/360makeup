@@ -87,8 +87,8 @@ def product_detail(request, productname):
         if current_user_ratings.count():
             current_user_rating = int(current_user_ratings[0].rating)
         else:
-            current_user_rating = 0
             rated_users_list = []
+            current_user_rating = 0
     else:
         rated_users_list = []
         current_user_rating = 0
@@ -128,6 +128,7 @@ def signup_login(request):
             profile = Profile()
             profile.user = user
             profile.save()
+        return redirect('/success')
     else:
         pass # Return an 'invalid login' error message.
     return render(request, 'site360/signuplogin.html', {})
@@ -174,6 +175,9 @@ def category_search(request, categoryname):
 
 def tutorials(request):
     return render(request, 'site360/tutorials.html', {})
+
+def auth_success(request):
+    return render(request, 'site360/login-logout-success.html', {})
 
 @register.filter
 def get_item(dictionary, key):

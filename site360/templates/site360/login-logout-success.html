@@ -1,1 +1,6 @@
 {% extends 'site360/base.html' %}
+
+{% block content %}
+<p>You have {% if user.is_authenticated %}logged in{% else %}logged out{% endif %} successfully!</p>
+<p><a href='/'>Home</a></p>
+{% endblock %}
