@@ -93,6 +93,9 @@ def product_detail(request, productname):
         rated_users_list = []
         current_user_rating = 0
 
+    # Get places to buy online
+    buy_online = correct_product.buy_online_to_list()
+
     # Get dupes
     dupes = correct_product.dupe_set.all().order_by('name')
 
@@ -117,7 +120,7 @@ def product_detail(request, productname):
         form = ReviewForm()
 
     # Render page if nothing has gone wrong along the way
-    return render(request, 'site360/product_detail.html', {'product_name': correct_product.name, 'product': correct_product, 'reviews': reviews, 'form': form, 'review_count': review_count, 'is_product_favorite': is_product_favorite, 'rated_users_list': rated_users_list, 'current_user_rating': current_user_rating, 'dupes': dupes,})
+    return render(request, 'site360/product_detail.html', {'product_name': correct_product.name, 'product': correct_product, 'reviews': reviews, 'form': form, 'review_count': review_count, 'is_product_favorite': is_product_favorite, 'rated_users_list': rated_users_list, 'current_user_rating': current_user_rating, 'dupes': dupes, 'buy_online': buy_online,})
 
 def about_us(request):
     return render(request, 'site360/about_us.html', {})

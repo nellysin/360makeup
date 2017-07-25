@@ -104,7 +104,6 @@ li.dropdown {
   <p><b>Average Number of Stars (out of 5):</b> {{ product.average_rating }} (based on {{ product.number_of_ratings }} ratings)</p>
 {% endif %}
 <p><b>Description:</b> {{ product.description|linebreaksbr }}</p>
-<p><b>Where to buy online:</b> Nowhere yet!</p>
 
 <br>
 {% if user.is_authenticated %}
@@ -160,6 +159,22 @@ li.dropdown {
 {% endif %}
 
 </div>
+<br>
+
+<div style = "background-color: #FFC2E0;
+    width: 664px;
+    border:1px ;
+    padding: 0px;
+    margin: 0px;">
+<h2>Where to Buy Online</h2></div>
+{% if buy_online|length > 1 %}
+  {% for site in buy_online %}
+    <p><a href="{{ site.0 }}">{{ site.1 }}</a></p>
+  {% endfor %}
+{% else %}
+  <p>Nowhere yet!</p>
+{% endif %}
+
 <br>
 
 <div style = "background-color: #FFC2E0;
