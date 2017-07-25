@@ -239,7 +239,7 @@ li.dropdown {
 {% if review_count %}
   {% for review in reviews %}
     <p>
-      <a href="/profile/{{ review.author }}">
+      <a href="/profile/{{ review.author }}" style="text-decoration:none">
         <img src="{{ review.author.profile.picture_url }}" width=32px height=32px id="profile-container">
         {{ review.author }}
       </a> says:
