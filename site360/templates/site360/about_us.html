@@ -89,12 +89,12 @@ body {font-family: Verdana,sans-serif;margin:0}
 }
 
 @-webkit-keyframes fade {
-  from {opacity: .4} 
+  from {opacity: .4}
   to {opacity: 1}
 }
 
 @keyframes fade {
-  from {opacity: .4} 
+  from {opacity: .4}
   to {opacity: 1}
 }
 
@@ -102,7 +102,7 @@ body {font-family: Verdana,sans-serif;margin:0}
 @media only screen and (max-width: 300px) {
   .prev, .next,.text {font-size: 11px}
 }
-  
+
 p.solid {border-style: solid; border-color:#ff8080;}
 </style>
 </head>
@@ -141,10 +141,10 @@ p.solid {border-style: solid; border-color:#ff8080;}
 <br>
 
 <div style="text-align:center">
-  <span class="dot" onclick="currentSlide(1)"></span> 
-  <span class="dot" onclick="currentSlide(2)"></span> 
+  <span class="dot" onclick="currentSlide(1)"></span>
+  <span class="dot" onclick="currentSlide(2)"></span>
   <span class="dot" onclick="currentSlide(3)"></span>
-  <span class="dot" onclick="currentSlide(4)"></span> 
+  <span class="dot" onclick="currentSlide(4)"></span>
 </div>
 
 <script>
@@ -163,22 +163,22 @@ function showSlides(n) {
   var i;
   var slides = document.getElementsByClassName("mySlides");
   var dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}    
+  if (n > slides.length) {slideIndex = 1}
   if (n < 1) {slideIndex = slides.length}
   for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";  
+      slides[i].style.display = "none";
   }
   for (i = 0; i < dots.length; i++) {
       dots[i].className = dots[i].className.replace(" active", "");
   }
-  slides[slideIndex-1].style.display = "block";  
+  slides[slideIndex-1].style.display = "block";
   dots[slideIndex-1].className += " active";
 }
 </script>
 <body>
      <div style="background-color:#FFC2E0;color:black;padding:20px;">
 <h1>Krupa</h1>
-<p>I am a typical teenager who is in love with makeup. Yet, whenever buying makeup I always have a struggle finding the best high end or drugstore brand that is suited for my skin or complexion. This website is designed to help people with the same struggles as me and anyone new to makeup who has decided to hop in the complexity of this world.I am 16 years old. I currently attend Galileo High School as a junior.</p>
+<p>I am a typical teenager who is in love with makeup. Yet, whenever buying makeup I always have a struggle finding the best high end or drugstore brand that is suited for my skin or complexion. This website is designed to help people with the same struggles as me and anyone new to makeup who has decided to hop in the complexity of this world. I am 17 years old. I currently attend Galileo High School as a junior.</p>
 <h1>Nelly</h1>
 <p>I am 16 years old. I currently attend Galileo High School as a junior. I don't usually use make-up, but I understand the struggle of finding a good reviews for something. So using my knowledge of coding, I helped build a better result for people who struggle in figuring out which product suits them.</p>
 <h1>Mikaela</h1>
@@ -186,14 +186,14 @@ function showSlides(n) {
 <h1>Nory</h1>
 <p>I am 16 years old. I currently attend Berkeley High School as a senior.</p>
      </div>
-  
+
 <h3>Our Mission</h3>
 
 <p class="solid"> Our goal is to provide all-around (360°) coverage of popular make-up products.
 <br>
 <br>
-We want to be your one stop site for questions any make-up related information , whether it be reviews, tutorials, or where to buy your product. Our hope is to save users the hassle of combing through Google search results or reading excessively long blog posts, just to see what others think of a make-up product.</p>  
-  
+We want to be your one stop site for questions any make-up related information , whether it be reviews, tutorials, or where to buy your product. Our hope is to save users the hassle of combing through Google search results or reading excessively long blog posts, just to see what others think of a make-up product.</p>
+
 </body>
 {% endblock %}
 </html>
