@@ -108,7 +108,7 @@ li.dropdown {
 
 <br>
 {% if user.is_authenticated %}
-
+  <p>Click the stars below to rate the product.</p>
   <form action="" method="get">
     <img src="http://imgur.com/FdlPxEa.png" class="star" onclick=darkenStars(1) width=32px height=32px>
     <img src="http://imgur.com/FdlPxEa.png" class="star" onclick=darkenStars(2) width=32px height=32px>
@@ -173,13 +173,19 @@ li.dropdown {
 
 {% if review_count %}
   {% for review in reviews %}
-    <p><a href="/profile/{{ review.author }}">{{ review.author }}</a> says:</p>
-    <p class="groove">{{ review.body|linebreaksbr }}</p>
+    <p>
+      <a href="/profile/{{ review.author }}">
+        <img src="{{ review.author.profile.picture_url }}" width=32px height=32px/>
+        {{ review.author }}
+      </a> says:
+    </p>
     {% if review.author in rated_users_list.keys %}
       <p>Rating: {{ rated_users_list|get_item:review.author }}/5 stars</p>
     {% else %}
       <p>This user hasn't rated the product yet.</p>
     {% endif %}
+    <p class="groove">{{ review.body|linebreaksbr }}</p>
+
     <br/>
   {% endfor %}
 {% else %}
