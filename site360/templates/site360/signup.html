@@ -1,12 +1,36 @@
 {% extends 'site360/base.html' %}
 
 {% block content %}
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+
+</head>
+<body>
+<div id="wrapper">
+
+<div class="form_div">
+
   <h2>Sign up</h2>
   <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    <div class="fieldWrapper">
+    {% for field in form %}
+        {{ field.label_tag }}<br>
+        {{ field }}<br>
+        {% if field.errors %}
+          <p class="error">{{ field.errors }}</p>
+        {% endif %}
+        {% if field.help_text %}
+          <p class="help">{{ field.help_text|safe }}</p>
+        {% else %}
+          <br>
+        {% endif %}
+    {% endfor %}
+    </div>
+
+
     <button type="submit" style="background-color: #FF47A3
-    ; 
+    ;
     border: none;
     color: white;
     padding: 15px 32px;
