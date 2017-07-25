@@ -142,7 +142,7 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('/')
+            return redirect('/success?registration')
     else:
         form = UserCreationForm()
     return render(request, 'site360/signup.html', {'form': form})
@@ -177,7 +177,12 @@ def tutorials(request):
     return render(request, 'site360/tutorials.html', {})
 
 def auth_success(request):
-    return render(request, 'site360/login-logout-success.html', {})
+    current_url = request.get_full_path()
+    if "?registration" in current_url:
+        did_user_just_register = True
+    else:
+        did_user_just_register = False
+    return render(request, 'site360/login-logout-success.html', {'did_user_just_register': did_user_just_register})
 
 @register.filter
 def get_item(dictionary, key):

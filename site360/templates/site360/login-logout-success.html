@@ -1,6 +1,17 @@
 {% extends 'site360/base.html' %}
 
 {% block content %}
-<p>You have {% if user.is_authenticated %}logged in{% else %}logged out{% endif %} successfully!</p>
-<p><a href='/'>Home</a></p>
+<p>
+  {% if did_user_just_register %}
+    You have registered successfully. Welcome to 360° Makeup, {{ user.username }}!
+  {% else %}
+    You have {% if user.is_authenticated %}logged in{% else %}logged out{% endif %} successfully!
+  {% endif %}
+</p>
+<p><a href='/'>Return to home</a></p>
+{% if user.is_authenticated %}
+  <p><a href='/profile/{{ user.username }}/'>View profile</a></p>
+{% else %}
+  <p><a href='/login/'>Log in</a></p>
+{% endif %}
 {% endblock %}
