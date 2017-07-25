@@ -53,9 +53,12 @@ def product_detail(request, productname):
 
     # Calculate and store ratings
     # *WEEPS* FORGIVE ME
+    rated_users = Rating.objects.filter(product=correct_product) # Ratings of users who rated this product
+    ratings_count = rated_users.count()
+    correct_product.number_of_ratings = ratings_count
+    correct_product.save()
     if request.user.is_authenticated:
         current_url = request.get_full_path()
-        rated_users = Rating.objects.filter(product=correct_product) # Ratings of users who rated this product
         rated_users_list = {rating.reviewer: int(rating.rating) for rating in rated_users}
         current_user_ratings = rated_users.filter(reviewer=request.user).all()
         if "?ratebutton=Give" in current_url:
@@ -66,7 +69,6 @@ def product_detail(request, productname):
                 rating.product = correct_product
                 rating.reviewer = request.user
                 rating.rating = current_rating
-                correct_product.number_of_ratings += 1
                 correct_product.save()
             else:
                 rating = current_user_ratings[0]
@@ -77,9 +79,13 @@ def product_detail(request, productname):
             rating_sum = 0
             # Recalculate product rating
             for product_rating in rated_users:
-                rating_sum += product_rating.rating
-            average_rating = rating_sum/correct_product.number_of_ratings
+                rating_sum += int(product_rating.rating)
+            rating_sum += int(current_rating)
+            average_rating = float(rating_sum)/float(correct_product.number_of_ratings+1)
             correct_product.average_rating = round(decimal.Decimal(average_rating), 1)
+            rated_users = Rating.objects.filter(product=correct_product) # Ratings of users who rated this product
+            ratings_count = rated_users.count()
+            correct_product.number_of_ratings = ratings_count
             correct_product.save()
 
             return redirect(current_split_url[0])
