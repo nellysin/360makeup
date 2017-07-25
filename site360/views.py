@@ -55,11 +55,11 @@ def product_detail(request, productname):
     # *WEEPS* FORGIVE ME
     rated_users = Rating.objects.filter(product=correct_product) # Ratings of users who rated this product
     ratings_count = rated_users.count()
+    rated_users_list = {rating.reviewer: int(rating.rating) for rating in rated_users}
     correct_product.number_of_ratings = ratings_count
     correct_product.save()
     if request.user.is_authenticated:
         current_url = request.get_full_path()
-        rated_users_list = {rating.reviewer: int(rating.rating) for rating in rated_users}
         current_user_ratings = rated_users.filter(reviewer=request.user).all()
         if "?ratebutton=Give" in current_url:
             current_split_url = current_url.split("?ratebutton=Give+this+product+")
@@ -93,10 +93,8 @@ def product_detail(request, productname):
         if current_user_ratings.count():
             current_user_rating = int(current_user_ratings[0].rating)
         else:
-            rated_users_list = []
             current_user_rating = 0
     else:
-        rated_users_list = []
         current_user_rating = 0
 
     # Get places to buy online
@@ -124,6 +122,8 @@ def product_detail(request, productname):
             return redirect(current_url)
     else:
         form = ReviewForm()
+
+    # print (rated_users_list.keys())
 
     # Render page if nothing has gone wrong along the way
     return render(request, 'site360/product_detail.html', {'product_name': correct_product.name, 'product': correct_product, 'reviews': reviews, 'form': form, 'review_count': review_count, 'is_product_favorite': is_product_favorite, 'rated_users_list': rated_users_list, 'current_user_rating': current_user_rating, 'dupes': dupes, 'buy_online': buy_online,})

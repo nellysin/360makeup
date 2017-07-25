@@ -42,6 +42,12 @@ class Review(models.Model):
     body = models.TextField(max_length=1000)
     product = models.ForeignKey(Product, null=True)
 
+    def __str__(self):
+        if self.author:
+            return self.author.username + ": " + self.body[:30]
+        else:
+            return "None: " + self.body[:30]
+
     def publish(self):
         self.published_date = timezone.now()
         self.save()
