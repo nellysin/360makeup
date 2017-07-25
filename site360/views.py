@@ -190,6 +190,9 @@ def auth_success(request):
         did_user_just_register = False
     return render(request, 'site360/login-logout-success.html', {'did_user_just_register': did_user_just_register})
 
+def stores(request):
+    return render(request, 'site360/stores.html', {})
+
 @register.filter
 def get_item(dictionary, key):
     return dictionary.get(key)

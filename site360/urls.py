@@ -24,5 +24,6 @@ urlpatterns = [
     url(r'^category/(?P<categoryname>([A-Z]|[a-z])*)/$', views.category_search, name='category_search'),
 
     url(r'^tutorials/$', views.tutorials, name='tutorials'),
+    url(r'^stores/$', views.stores, name='stores'),
 
 ]
