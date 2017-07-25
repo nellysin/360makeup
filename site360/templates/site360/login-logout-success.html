@@ -1,7 +1,19 @@
 {% extends 'site360/base.html' %}
 
 {% block content %}
-<p>
+<style>
+  p{
+    background-color: #FF47A3; 
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;"
+    }
+   </style>
+<p style = "color:white">
   {% if did_user_just_register %}
     You have successfully registered. Welcome to 360° Makeup, {{ user.username }}!
   {% elif user.is_authenticated %}
@@ -10,11 +22,11 @@
     You have logged out successfully.
   {% endif %}
 </p>
-<p><a href='/'>Return to home</a></p>
+<p style = "color:white"><a href='/'>Return to home</a></p>
 {% if user.is_authenticated %}
-  <p><a href='/profile/{{ user.username }}/'>View profile</a></p>
+  <p style =><a href='/profile/{{ user.username }}/'>View profile</a></p>
 {% else %}
-  <p><a href='/login/'>Log in</a></p>
+  <p><a style = "color:white" href='/login/'>Log in</a></p>
 {% endif %}
 <img src="http://scbeautyhigh.files.wordpress.com/2013/10/clumps-mascara1.gif?w=500&h=213" style="float:center;width:400px;height:250px;">
 <img src="http://www.salonsuitesolutions.com/wp-content/uploads/2017/07/Makeup.jpg" style="float:center;width:400px;height:250px;">
