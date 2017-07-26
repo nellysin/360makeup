@@ -21,26 +21,64 @@ function myMap() {
   var green3 = new google.maps.LatLng(37.777109,-122.395241);
   var sephora3 = new google.maps.LatLng(37.784885,-122.408149);
   
-  /*markers*/
-  var marker = new google.maps.Marker({position:sephora1});
-  marker.setMap(map);
-  var marker = new google.maps.Marker({position:cvs1});
-  marker.setMap(map);
-  var marker = new google.maps.Marker({position:green1});
-  marker.setMap(map);
-  var marker = new google.maps.Marker({position:sephora2});
-  marker.setMap(map);
-  var marker = new google.maps.Marker({position:green2});
-  marker.setMap(map);
-  var marker = new google.maps.Marker({position:green3});
-  marker.setMap(map);
-  var marker = new google.maps.Marker({position:sephora3});
-  marker.setMap(map);
-  var marker = new google.maps.Marker({position:green3});
-  marker.setMap(map);
+  /*information when clicked*/
+  google.maps.event.addListener(marker,'click',function() {
+    var infowindow = new google.maps.InfoWindow({
+      content:"Two Embarcadero Center, 2 Embarcadero Center, San Francisco, CA 94111, USA"
+      });
+      
+  infowindow.open(map,marker);
+  });
+  google.maps.event.addListener(marker1,'click',function() {
+    var infowindow = new google.maps.InfoWindow({
+      content:"1700 Van Ness Ave, San Francisco, CA 94109, USA"
+      });
+  infowindow.open(map,marker1);
+  });
+  google.maps.event.addListener(marker2,'click',function() {
+    var infowindow = new google.maps.InfoWindow({
+      content:"1979 Mission St, San Francisco, CA 94103, USA"
+    });
+  infowindow.open(map,marker2);
+  });   
   
+  google.maps.event.addListener(marker3,'click',function() {
+    var infowindow = new google.maps.InfoWindow({
+      content:"2083 Union St, San Francisco, CA 94123, USA"
+    });
+  infowindow.open(map,marker3);
+  });  
+  
+  google.maps.event.addListener(marker4,'click',function() {
+    var infowindow = new google.maps.InfoWindow({
+      content:"45 Castro St, San Francisco, CA 94114, USA"
+    });
+  infowindow.open(map,marker4);
+  });  
+  
+  google.maps.event.addListener(marker5,'click',function() {
+    var infowindow = new google.maps.InfoWindow({
+      content:"670 4th St, San Francisco, CA 94107, USA"
+    });
+  infowindow.open(map,marker5);
+  }); 
+  
+  google.maps.event.addListener(marker6,'click',function() {
+    var infowindow = new google.maps.InfoWindow({
+      content:"670 4th St, San Francisco, CA 94107, USA"
+    });
+  infowindow.open(map,marker6);
+  }); 
+  
+  google.maps.event.addListener(marker7,'click',function() {
+    var infowindow = new google.maps.InfoWindow({
+      content:"28 Cyril Magnin St, San Francisco, CA 94102, USA"
+    });
+  infowindow.open(map,marker7);
+  }); 
   
 }
+  
 </script>
 
 <!--library for the google maps-->
