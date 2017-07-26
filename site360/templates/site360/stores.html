@@ -21,6 +21,25 @@ function myMap() {
   var green3 = new google.maps.LatLng(37.777109,-122.395241);
   var sephora3 = new google.maps.LatLng(37.784885,-122.408149);
   
+  /*markers*/
+  var marker = new google.maps.Marker({position:sephora1});
+  marker.setMap(map);
+  var marker1 = new google.maps.Marker({position:cvs1});
+  marker1.setMap(map);
+  var marker2 = new google.maps.Marker({position:green1});
+  marker2.setMap(map);
+  var marker3 = new google.maps.Marker({position:sephora2});
+  marker3.setMap(map);
+  var marker4 = new google.maps.Marker({position:green2});
+  marker4.setMap(map);
+  var marker5 = new google.maps.Marker({position:green3});
+  marker5.setMap(map);
+  var marker6 = new google.maps.Marker({position:sephora3});
+  marker6.setMap(map);
+  var marker7 = new google.maps.Marker({position:green3});
+  marker7.setMap(map);
+  
+  
   /*information when clicked*/
   google.maps.event.addListener(marker,'click',function() {
     var infowindow = new google.maps.InfoWindow({
