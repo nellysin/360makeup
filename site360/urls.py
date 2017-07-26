@@ -3,7 +3,11 @@ from django.conf import settings
 from . import views
 from django.contrib.auth import views as auth_views
 
+# urls.py dictates which URLs correspond to which pages on the site
+
+# valid URLs
 urlpatterns = [
+    # Basic, non-dynamic pages
     url(r'^$', views.home, name='home'),
     url(r'^about-us/$', views.about_us, name='about_us'),
 
@@ -23,6 +27,7 @@ urlpatterns = [
     # Search-related pages
     url(r'^category/(?P<categoryname>([A-Z]|[a-z])*)/$', views.category_search, name='category_search'),
 
+    # Miscellaneous pages that definitely weren't in the MVP *sigh*
     url(r'^tutorials/$', views.tutorials, name='tutorials'),
     url(r'^stores/$', views.stores, name='stores'),
 

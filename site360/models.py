@@ -133,8 +133,13 @@ def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
 class Favorite(models.Model):
+    # Created when a user adds an item to their list of favorites
+
+    # The user who favorited the product
     user = models.ForeignKey('auth.User', related_name='favorite_user', null=True)
+    # The favorited product
     product = models.ForeignKey('Product', related_name='favorite_product', null=True)
+    # The date the user added it to their favorites
     date_favorited = models.DateTimeField(
             default=timezone.now)
 
@@ -146,7 +151,11 @@ class Favorite(models.Model):
         self.save()
 
 class Dupe(models.Model):
+    # Alternatives to more expensive products
+
+    # The product that the dupe is an alternative to
     product = models.ForeignKey('Product', null=True)
+    # The same basic information is stored about the dupe as about the product
     name = models.CharField(max_length=100)
     company = models.CharField(max_length=100)
     url = models.URLField()

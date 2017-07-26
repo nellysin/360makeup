@@ -9,10 +9,10 @@ from .models import Product, Favorite, Rating, Profile, Dupe
 from .forms import ReviewForm, ProfilePictureForm
 import decimal
 
-def url_to_product_name(url):
-    return url.replace("-", " ")
+# views.py is the code of the page
 
 def home(request):
+    # The home page
     return render(request, 'site360/home.html', {})
 
 def product_detail(request, productname):
@@ -32,84 +32,144 @@ def product_detail(request, productname):
     # Handle user marking product as their favorite
     is_product_favorite = False
     favorite_users = Favorite.objects.filter(product=correct_product)
+
     # If the current user has not yet favorited this product:
     if request.user.is_authenticated:
         current_user_favorite = favorite_users.filter(user=request.user)
         if current_user_favorite.count() == 0:
             is_product_favorite = False
+
+            # If the user has pressed the favorite button:
             if request.GET.get('favoritebutton'):
+
+                # Create a new favorite object
                 favorite = Favorite()
+
+                # Fill in its details
                 favorite.product = correct_product
                 favorite.user = request.user
                 favorite.save()
+
+                # Reload the page so the page knows the user has marked the product
+                # as a favorite
                 current_url = request.get_full_path().split("?")[0]
                 return redirect(current_url)
-        else:
+
+        else: # If the product is already a favorite:
             is_product_favorite = True
+
+            # If the user has pressed the remove button:
             if request.GET.get('removefavoritebutton'):
+
+                # Delete the favorite object
                 current_user_favorite.delete()
+
+                # Reload the page so the script doesn't try to remove the product twice
                 current_url = request.get_full_path().split("?")[0]
                 return redirect(current_url)
 
     # Calculate and store ratings
     # *WEEPS* FORGIVE ME
-    rated_users = Rating.objects.filter(product=correct_product) # Ratings of users who rated this product
+
+    # Ratings of users who rated this product
+    rated_users = Rating.objects.filter(product=correct_product)
+    # The number of users who have rated this product
     ratings_count = rated_users.count()
+    # Dictionary associating each user who has rated the product with the rating they gave it
     rated_users_list = {rating.reviewer: int(rating.rating) for rating in rated_users}
 
+    # Recalculate product rating
     correct_product.number_of_ratings = ratings_count
+
+    # If people have rated this product so far:
     if correct_product.number_of_ratings:
-        # Recalculate product rating
+
+        # Take the average of all submitted reviews
         rating_sum = 0
         for product_rating in rated_users:
             rating_sum += int(product_rating.rating)
-        print (rating_sum)
         average_rating = float(rating_sum)/float(correct_product.number_of_ratings)
         correct_product.average_rating = round(decimal.Decimal(average_rating), 1)
+
+    # If no one has rated this product yet:
     else:
+        # Set the average rating to zero
         correct_product.average_rating = 0
+
+    # Update the current product's rating in the database
     correct_product.save()
 
+    # If the user is logged in:
     if request.user.is_authenticated:
-        current_url = request.get_full_path()
+        # Get the rating the user gave this product
         current_user_ratings = rated_users.filter(reviewer=request.user).all()
+
+        # Get the page's current URL
+        current_url = request.get_full_path()
+        # If the user pressed the "Give this product [x] stars" button (thus rating it):
         if "?ratebutton=Give" in current_url:
+            # Find out from the button how many stars the user gave this product
             current_split_url = current_url.split("?ratebutton=Give+this+product+")
             current_rating = current_split_url[1][0]
-            if current_user_ratings.count() == 0: # User has rated product for the first time
+
+            # If this is the user's first time rating the product:
+            if current_user_ratings.count() == 0:
+
+                # Create a new Rating object
                 rating = Rating()
+
+                #Fill it in with the correct information
                 rating.product = correct_product
                 rating.reviewer = request.user
                 rating.rating = current_rating
                 correct_product.save()
+
+            # If the user has rated this product before:
             else:
+
+                # Access the user's previous rating object
                 rating = current_user_ratings[0]
+                # Set the rating value to the new rating
                 rating.rating = current_rating
 
+            # Save the rating object, be it new or updated, to the database
             rating.save()
 
-            rating_sum = 0
             # Recalculate product rating
+            rating_sum = 0
             for product_rating in rated_users:
                 rating_sum += int(product_rating.rating)
+            # Add in the most recent ratings
             rating_sum += int(current_rating)
             average_rating = float(rating_sum)/float(correct_product.number_of_ratings+1)
+
+            # Update the product's average rating with the new value
             correct_product.average_rating = round(decimal.Decimal(average_rating), 1)
-            rated_users = Rating.objects.filter(product=correct_product) # Ratings of users who rated this product
+            # Recalculate the number of users who have rated this product
+            rated_users = Rating.objects.filter(product=correct_product)
             ratings_count = rated_users.count()
+            # Update the product with the new information
             correct_product.number_of_ratings = ratings_count
             correct_product.save()
 
+            # Redirect the user so multiple review objects are not created
             return redirect(current_split_url[0])
 
+        # If the user didn't just rate the product:
+
+        # If the user has rated the product before:
         if current_user_ratings.count():
+            # Get the rating they previously gave the product
             current_user_rating = int(current_user_ratings[0].rating)
+
+        # If the user hasn't rated the product, or if they aren't logged in:
+        # automatically set their rating to 0
         else:
             current_user_rating = 0
     else:
         current_user_rating = 0
 
-    # Get places to buy online
+    # Get the formatted list of places to buy online
     buy_online = correct_product.buy_online_to_list()
 
     # Get dupes
@@ -120,8 +180,14 @@ def product_detail(request, productname):
     review_count = reviews.count()
 
     # Handle user posting review
+
+    # If the user has just posted a review:
     if request.method == "POST":
+
+        # Get the half-created review object generated by the form
         form = ReviewForm(request.POST)
+
+        # If the form is valid:
         if form.is_valid():
             review = form.save(commit=False)
             review.published_date = timezone.now()
