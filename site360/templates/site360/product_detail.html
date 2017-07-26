@@ -123,7 +123,11 @@ li.dropdown {
 <br>
 {% if user.is_authenticated %}
   {% if user in rated_users_list.keys %}
-    <p>You gave this product {{ current_user_rating }} stars.</p>
+    {% if current_user_rating == 1 %}
+      <p>You gave this product 1 star.</p>
+    {% else %}
+      <p>You gave this product {{ current_user_rating }} stars.</p>
+    {% endif %}
   {% endif %}
   <p>Click the stars below to {% if user in rated_users_list.keys %}change your rating{% else %}rate this product{% endif %}.</p>
   <form action="" method="get">
